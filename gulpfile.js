@@ -74,6 +74,14 @@ gulp.task('php', function() {
         }))
 });
 
+gulp.task('DBconfig', function() {
+    return gulp.src(devPaths.base + '/config.php')
+        .pipe(gulp.dest(webPaths.tmpl))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+
 // Duplicate main.js file and minify it in the webPath
 gulp.task('js', function() {
     return gulp.src(devPaths.script + '/**/*.js')
@@ -126,11 +134,12 @@ gulp.task('bootstrapcss', function() {
 });
 
 // Default Task
-gulp.task('default', ['browserSync', 'fonts', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss'], function() {
+gulp.task('default', ['browserSync', 'fonts', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss', 'DBconfig'], function() {
     gulp.watch(devPaths.fonts + '**/*', ['fonts']);
     gulp.watch(devPaths.img + '/**/*.+(png|jpg|jpeg|gif|svg)', ['imagemin']);
     gulp.watch(devPaths.tmpl + '/**/*.php', ['php']);
     gulp.watch(devPaths.script + '/**/*.js', ['js']);
+    gulp.watch(devPaths.base + '/config.php', ['DBconfig']);
     gulp.watch(devPaths.styles + '/**/*.scss', ['sass']);
     gulp.watch(devPaths.styles + '/**/*.css', ['css']);
     gulp.watch(bootstrapPaths.styles + '/**/*.css', ['boostrapcss']);
