@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: $gray-color--light;
+  background-color: $gray-color--light-light;
   &__wrapper{
     max-width: 350px;
     width: 100%;
@@ -11,12 +11,12 @@
     border-radius: 3px;
     height: auto;
     padding: 50px 20px;
-    @include boxShadow(0.05);
+    @include boxShadow(0.03);
     margin-top: 10%;
   }
   &__btn{
     background-color: $primary-color;
-    color: $gray-color--dark;
+    color: $gray-color--medium-dark;
   }
   &__alert{
     display: none;

@@ -12,7 +12,8 @@ var devPaths = {
     styles: 'src/sass',
     script: 'src/js',
     img: 'src/images',
-    fonts: 'src/fonts'
+    fonts: 'src/fonts',
+    icons: 'src/icons'
 };
 
 var bootstrapPaths = {
@@ -32,7 +33,8 @@ var webPaths = {
     styles: 'web/css',
     script: 'web/js',
     img: 'web/images',
-    fonts: 'web/fonts'
+    fonts: 'web/fonts',
+    icons: 'web/icons'
 };
 
 
@@ -48,6 +50,14 @@ gulp.task('browserSync', function() {
 gulp.task('fonts', function() {
     return gulp.src(devPaths.fonts + '/**/*')
         .pipe(gulp.dest(webPaths.fonts))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+
+gulp.task('icons', function() {
+    return gulp.src(devPaths.icons + '/**/*')
+        .pipe(gulp.dest(webPaths.icons))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -134,8 +144,9 @@ gulp.task('bootstrapcss', function() {
 });
 
 // Default Task
-gulp.task('default', ['browserSync', 'fonts', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss', 'DBconfig'], function() {
+gulp.task('default', ['browserSync', 'fonts', 'icons', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss', 'DBconfig'], function() {
     gulp.watch(devPaths.fonts + '**/*', ['fonts']);
+    gulp.watch(devPaths.icons + '**/*', ['icons']);
     gulp.watch(devPaths.img + '/**/*.+(png|jpg|jpeg|gif|svg)', ['imagemin']);
     gulp.watch(devPaths.tmpl + '/**/*.php', ['php']);
     gulp.watch(devPaths.script + '/**/*.js', ['js']);

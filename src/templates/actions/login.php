@@ -1,14 +1,8 @@
 <?php
+  require(__DIR__.'/connectDB.php');
+
   $username = $_POST['username'];
   $password = $_POST['password'];
-
-  require(__DIR__.'/../config.php');
-  $db_database = 'chcsystem';
-
-  $mysqli = new mysqli($db_servername, $db_username, $db_password, $db_database);
-  if ($mysqli->connect_errno) {
-      echo "Nepodařilo se připojit k databázi: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-  }
 
   $username = $mysqli->real_escape_string($username);
   $password = $mysqli->real_escape_string($password);
@@ -16,6 +10,8 @@
   $res = $mysqli->query("SELECT * FROM chc_users WHERE username ='".$username."'");
   $row = $res->fetch_assoc();
   $hash = $row['password'];
+  $name = $row['name'];
+  $type = $row['type'];
 
   $valid = password_verify($password, $hash);
     if ( $valid ) {
@@ -25,6 +21,8 @@
      }
       session_start();
       $_SESSION['username'] = $username;
+      $_SESSION['name'] = $name;
+      $_SESSION['type'] = $type;
       echo 1;
     } else {
      echo 0;

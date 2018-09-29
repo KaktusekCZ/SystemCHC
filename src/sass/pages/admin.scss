@@ -1,0 +1,113 @@
+.admin{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: $white-color;
+  &>.row{
+    height: 100%;
+  }
+  &__logo{
+    text-align: center;
+    padding: 21px;
+    color: $gray-color--dark-dark;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    height: 64px;
+  }
+  &__menu{
+    background-color: $gray-color--light-lightest;
+    border-right: 1px solid $gray-color--light-light;
+    height: 100%;
+    ul{
+      margin: 0;
+      a{
+        text-decoration: none;
+      }
+      li{
+        color: $gray-color--dark-light;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 11px;
+        padding: 24px 20px;
+        @include transition(all 200ms);
+        &:after{
+          content: '';
+          display: table;
+          clear: both;
+        }
+        .fas{
+          font-size: 15px;
+          vertical-align: middle;
+          margin-right: 20px;
+          float: right;
+        }
+        span{
+          vertical-align: middle;
+        }
+        &.active{
+          border-left: 3px solid $gray-color--dark-light;
+          background-color: $gray-color--light-light;
+        }
+        &:hover{
+          background-color: $gray-color--light-light;
+          @include transition(all 200ms);
+        }
+      }
+    }
+  }
+
+  &__bar{
+    width: 100%;
+    padding: 15px 0px;
+    background-color: $gray-color--light-lightest;
+    border-bottom: 1px solid darken($gray-color--light-lightest, 5%);
+    &:after{
+      content: '';
+      display: table;
+      clear: both;
+    }
+    &__status{
+      float: right;
+    }
+    &__item{
+      margin-right: 30px;
+      display: inline-block;
+      vertical-align: middle;
+      &>span{
+        font-size: 11px;
+        padding: 7px 14px;
+        background-color: $primary-color;
+        vertical-align: middle;
+        border-radius: 3px;
+        margin-right: 10px;
+        color: $gray-color--dark-medium;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      &--logout{
+        padding: 5px 10px;
+        background-color: $red-color;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 12px;
+        vertical-align: middle;
+        cursor: pointer;
+        border-bottom: 3px solid darken($red-color, 5%);
+        padding-top: 7px;
+        .fas{
+          margin-left: 10px;
+        }
+        &>span{
+          vertical-align: middle;
+        }
+        &:hover{
+          background-color: lighten($red-color, 5%);
+          border-bottom: 3px solid $red-color;
+        }
+      }
+    }
+  }
+}

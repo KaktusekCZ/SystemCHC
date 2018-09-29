@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
-  header("Location: ../?status=loggedAuto");
+  header("Location: ../admin/?status=loggedAuto");
   die();
 }
 ?>
@@ -11,35 +11,24 @@ if (isset($_SESSION['username'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>CHC | Přihlášení</title>
     <link href="http://gulpjs.com/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../css/main.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
-    <link href="../fonts/fontawesome/all.min.css" rel="stylesheet">
+    <link href="../icons/fontawesome/all.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="login">
-      <?php
-        if (isset($_GET['status'])) {
-          $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-          $parts = parse_url($url);
-          parse_str($parts['query'], $query);
-          if ($query['status'] == 'logout') {
-            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Byl/a jste odhlášen/a.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>';
-          }
-        }
-      ?>
       <div class="login__wrapper">
         <div class="container">
           <div class="row">
             <div class="col-12">
+              <?php
+              include(__DIR__.'/../actions/loginStatus.php');
+              ?>
               <div class="login__alert alert alert-danger js-alert-wrongLogin" role="alert">
                 <i class="fas fa-times"></i> Nesprávné uživatelské jméno nebo heslo.
               </div>
@@ -88,13 +77,13 @@ if (isset($_SESSION['username'])) {
             var serializedData = $form.serialize();
             $inputs.prop("disabled", true);
             request = $.ajax({
-                url: "login.php",
+                url: "../actions/login.php",
                 type: "post",
                 data: serializedData
             });
             request.done(function (response, textStatus, jqXHR){
               if (response == 1) {
-                window.location.href = "../?status=loggedIn";
+                window.location.href = "../admin/?status=loggedIn";
               } else if (response == 0){
                 $('.js-alert-wrongLogin').addClass('login__alert--visible');
               } else {

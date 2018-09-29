@@ -2,14 +2,55 @@ $primary-color: #f6e823;
 
 $white-color: #fff;
 $black-color: #000;
-$green-color: #94db76;
+$red-color: #dc3545;
 
-$gray-color--light: #f7f7f7;
-$gray-color--medium: #828282;
-$gray-color--dark: #232323;
+$gray-color--light-lightest: rgb(246,246,246);
+
+$gray-color--light-light: rgb(234,234,234);
+$gray-color--light-medium: rgb(208,208,208);
+$gray-color--light-dark: rgb(182,182,182);
+
+$gray-color--medium-light: rgb(156,156,156);
+$gray-color--medium-medium: rgb(130,130,130);
+$gray-color--medium-dark: rgb(104,104,104);
+
+$gray-color--dark-light: rgb(78,78,78);
+$gray-color--dark-medium: rgb(52,52,52);
+$gray-color--dark-dark: rgb(26,26,26);
+
 
 @mixin boxShadow($opacity){
   -webkit-box-shadow: 0px 0px 31px 0px rgba(0,0,0,$opacity);
   -moz-box-shadow: 0px 0px 31px 0px rgba(0,0,0,$opacity);
   box-shadow: 0px 0px 31px 0px rgba(0,0,0,$opacity);
+}
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+    -moz-transition-property:    $duration;
+    -o-transition-property:      $duration;
+    -webkit-transition-property: $duration;
+    transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
 }
