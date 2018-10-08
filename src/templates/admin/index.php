@@ -9,8 +9,21 @@
   require(__DIR__.'/../actions/logoutAuto.php');
   require(__DIR__.'/../actions/functions.php');
 
-  $res = $mysqli->query("SELECT * FROM chc_users WHERE username ='".$_SESSION["username"]."'");
-  $row = $res->fetch_assoc();
+  $acc = $mysqli->query("SELECT * FROM chc_users WHERE username ='".$_SESSION["username"]."'");
+  $accRow = $acc->fetch_assoc();
+
+  $group = $mysqli->query("SELECT * FROM chc_groups WHERE id ='".$accRow["groupID"]."'");
+  $groupRow = $group->fetch_assoc();
+
+  if ($accRow["type"] == 3) {
+    $query = "SELECT * FROM chc_events";
+  } else if ($accRow["type"] == 2) {
+    $query = "SELECT * FROM chc_events WHERE teacherID ='".$accRow["id"]."'";
+  } else {
+    $query = "SELECT * FROM chc_events WHERE groupID ='".$accRow["groupID"]."'";
+  }
+  $event = $mysqli->query($query);
+  $events = resultToArray($event);
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,14 +45,14 @@
         <div class="admin__menu col-2">
           <div class="admin__logo">Hodnocení učitelů CHC</div>
           <ul>
-            <?php if($row["type"] == 1) : ?>
-              <a href="#"><li class="active"><span>Souhrn</span><i class="fas fa-list-ul"></i></li></a>
-              <a href="#"><li><span>Nové hodnocení</span><i class="fas fa-plus"></i></li></a>
-            <?php elseif($row["type"] == 2) : ?>
+            <?php if($accRow["type"] == 1) : ?>
+              <a href="#"><li class="active"><span>Hodnotit</span><i class="fas fa-plus"></i></li></a>
+              <a href="#"><li><span>Mé hodnocení</span><i class="fas fa-list-ul"></i></li></a>
+            <?php elseif($accRow["type"] == 2) : ?>
               <div class="aaa">
                 Menu Ucitele
               </div>
-            <?php elseif($row["type"] == 3) : ?>
+            <?php elseif($accRow["type"] == 3) : ?>
               <div class="aaa">
                 Menu Admina
               </div>
@@ -52,11 +65,29 @@
           ?>
           <div class="admin__bar">
             <div class="admin__bar__status">
-              <div class="admin__bar__item admin__bar__item--type"><span><i class="fas fa-user"></i> Typ účtu</span> <?php getAccountType($row["type"]); ?></div>
-              <div class="admin__bar__item admin__bar__item--name"><span><i class="fas fa-check"></i> Přihlášen</span> <?php echo $row["name"] ?></div>
+              <?php echo '<div class="admin__bar__item admin__bar__item--type"><span><i class="fas fa-user"></i> Typ účtu</span>'.getAccountType($accRow["type"]).'</div>'?>
+              <?php if($accRow["type"] == 1) : ?>
+                <div class="admin__bar__item admin__bar__item--grade"><span><i class="fas fa-users"></i> Třída</span> <?php echo getAccountGrade($groupRow); ?></div>
+              <?php endif; ?>
+              <div class="admin__bar__item admin__bar__item--name"><span><i class="fas fa-user"></i> Přihlášen</span> <?php echo $accRow["name"] ?></div>
               <div class="admin__bar__item admin__bar__item--logout js-admin-logout">Odhlásit se <i class="fas fa-sign-out-alt"></i></div>
             </div>
           </div>
+
+          <div class="admin__votes">
+            <?php echo '<h1>Možnosti hodnocení pro '.getAccountGrade($groupRow).'</h1>'?>
+            <?php
+              for ($i=0; $i < count($events); $i++) {
+                echo '<div class="admin__votes__item">';
+                echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
+                echo '<div class="admin__votes__content admin__votes__teacher">'.getTeacherName($mysqli, $events[$i]["teacherID"]).'</div>';
+                echo '<div class="admin__votes__content admin__votes__time">'.$events[$i]['created'].'</div>';
+                echo '<div class="admin__votes__content admin__votes__btn">Hodnotit</div>';
+                echo '</div>';
+              }
+            ?>
+          </div>
+
         </div>
       </div>
     </div>

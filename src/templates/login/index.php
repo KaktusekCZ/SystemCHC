@@ -94,7 +94,7 @@ if (isset($_SESSION['username'])) {
               $('.js-alert-unknown').addClass('login__alert--visible');
             });
             request.always(function () {
-                $inputs.prop("disabled", false);
+              $inputs.prop("disabled", false);
             });
         });
       });

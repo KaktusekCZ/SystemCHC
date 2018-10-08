@@ -215,6 +215,33 @@
   border-bottom: 3px solid #dc3545;
 }
 
+.admin__votes {
+  padding: 3% 13%;
+}
+
+.admin__votes__item {
+  width: 100%;
+  padding: 30px 15px;
+  background-color: #fff;
+}
+
+.admin__votes__item:nth-child(2n) {
+  background-color: #f6f6f6;
+}
+
+.admin__votes__item:first-of-type {
+  border-radius: 3px 3px 0px 0px;
+}
+
+.admin__votes__item:last-of-type {
+  border-radius: 0px 0px 3px 3px;
+}
+
+.admin__votes__content {
+  display: inline-block;
+  width: 25%;
+}
+
 *,
 *:after,
 *:before {
