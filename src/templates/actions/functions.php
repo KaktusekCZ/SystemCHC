@@ -28,7 +28,7 @@ function getAccountGrade($group){
       $toReturn .= 'MT';
       break;
     default:
-      $toReturn .= 'Unknown type';
+      $toReturn = 'všechny ročníky';
       break;
   }
   return $toReturn;
