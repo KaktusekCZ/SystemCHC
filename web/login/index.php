@@ -57,11 +57,14 @@ if (isset($_SESSION['username'])) {
                                 <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se</button>
 
                             </form>
-
+                            <a class="noacount" href="../register">
+                                Ještě němám účet.
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <script src="../js/vendor/jquery-3.3.1.min.js"></script>
         <script src="../js/main.js"></script>

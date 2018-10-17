@@ -24,4 +24,17 @@
       display: block;
     }
   }
+  .noacount{
+    margin-top: 20px;
+    color: $gray-color--medium-light;
+    display: block;
+    text-align: center;
+  }
+  select{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: calc(100% - 36px);
+    @include boxShadow(0.03);
+  }
 }
