@@ -12,6 +12,7 @@
   $hash = $row['password'];
   $name = $row['name'];
   $type = $row['type'];
+  $id = $row['id'];
 
   $valid = password_verify($password, $hash);
     if ( $valid ) {
@@ -23,6 +24,7 @@
       $_SESSION['username'] = $username;
       $_SESSION['name'] = $name;
       $_SESSION['type'] = $type;
+      $_SESSION['id'] = $id;
       echo 1;
     } else {
      echo 0;
