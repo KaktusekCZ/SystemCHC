@@ -31,17 +31,7 @@ if (isset($_SESSION['username'])) {
                             <?php
                     include(__DIR__ . '/../actions/loginStatus.php');
                     ?>
-                            <div class="login__alert alert alert-danger js-alert-wrongLogin" role="alert">
-                                <i class="fas fa-times"></i> Uživatelské jméno již existuje.
-                            </div>
-                            <div class="login__alert alert alert-danger js-alert-wrongPass" role="alert">
-                                <i class="fas fa-times"></i> Zadaná hesla se neshodují.
-                            </div>
-                            <div class="login__alert alert alert-danger js-alert-longUser" role="alert">
-                                <i class="fas fa-times"></i> Uživatelské jméno je příliš dlouhé.
-                            </div>
-                            <div class="login__alert alert alert-danger js-alert-falseteacher" role="alert">
-                                <i class="fas fa-times"></i> Chybný učitelský e-mail.
+                            <div class="login__alert alert alert-danger js-alert-everything" role="alert">
                             </div>
                             <div class="login__alert alert alert-warning js-alert-unknown" role="alert">
                                 <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte
@@ -128,13 +118,14 @@ if (isset($_SESSION['username'])) {
                 $("#registry").submit(function(event)
                 {
                     event.preventDefault();
+                    var elem = $('.js-alert-everything');
                     if ($("input[name=username]").val().length > 16)
                     {
-                        $('.js-alert-longUser').addClass('login__alert--visible');
+                        elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Uživatelské jméno je příliš dlouhé");
                     }
-                    else if (getAdressPart($(".teacher__email").val()) != "creativehill.cz" && getTeacher())
+                    else if (getAdressPart($(".teacher__email").val()) != "charvatpetr.cz" && getTeacher())
                     {
-                        $('.js-alert-falseteacher').addClass('login__alert--visible');
+                        elem.addClass('login__alert--visible').html(" <i class=\"fas fa-times\"></i> Chybný učitelský e-mail.");
                     }
                     else
                     {
@@ -160,21 +151,21 @@ if (isset($_SESSION['username'])) {
                                     window.location.href = "../admin/?status=loggedIn";
                                     break;
                                 case "2":
-                                    $('.js-alert-wrongLogin').addClass('login__alert--visible');
+                                    elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Uživatelské jméno již existuje.");
                                     break;
                                 case "3":
-                                    $('.js-alert-wrongPass').addClass('login__alert--visible');
+                                    elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Zadaná hesla se neshodují.");
                                     break;
-                                case "4":
-                                    $('.js-alert-wrongteacher').addClass('login__alert--visible')
                                 default:
                                     console.log(response);
-                                    $('.js-alert-unknown').addClass('login__alert--visible');
+                                    elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-exclamation-triangle\"></i> " +
+                                        "Vyskytla se neznámá chyba. Prosím, kontaktujte správce.");
                             }
                         });
                         request.fail(function(jqXHR, textStatus, errorThrown)
                         {
-                            $('.js-alert-unknown').addClass('login__alert--visible');
+                            elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-exclamation-triangle\"></i> " +
+                                "Vyskytla se neznámá chyba. Prosím, kontaktujte správce.");
                         });
                         request.always(function()
                         {

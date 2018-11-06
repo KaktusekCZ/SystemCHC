@@ -1,16 +1,16 @@
 <?php
-  session_start();
-  if (!isset($_SESSION['username'])) {
+session_start();
+if (!isset($_SESSION['username'])) {
     header("Location: ../login/?status=loginNeeded");
     die();
-  }
+}
 
-  require(__DIR__.'/../actions/connectDB.php');
-  require(__DIR__.'/../actions/logoutAuto.php');
-  require(__DIR__.'/../actions/functions.php');
+require(__DIR__ . '/../actions/connectDB.php');
+require(__DIR__ . '/../actions/logoutAuto.php');
+require(__DIR__ . '/../actions/functions.php');
 
-  $res = $mysqli->query("SELECT * FROM chc_users WHERE username ='".$_SESSION["username"]."'");
-  $row = $res->fetch_assoc();
+$res = $mysqli->query("SELECT * FROM chc_users WHERE username ='" . $_SESSION["username"] . "'");
+$row = $res->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,18 +34,18 @@
                 <div class="admin__menu col-2">
                     <div class="admin__logo">Hodnocení učitelů CHC</div>
                     <ul>
-                        <?php if($row["type"] == 1) : ?>
+                        <?php if ($row["type"] == 1) : ?>
                         <a href="#">
                             <li class="active"><span>Souhrn</span><i class="fas fa-list-ul"></i></li>
                         </a>
                         <a href="#">
                             <li><span>Nové hodnocení</span><i class="fas fa-plus"></i></li>
                         </a>
-                        <?php elseif($row["type"] == 2) : ?>
+                        <?php elseif ($row["type"] == 2) : ?>
                         <div class="aaa">
                             Menu Ucitele
                         </div>
-                        <?php elseif($row["type"] == 3) : ?>
+                        <?php elseif ($row["type"] == 3) : ?>
                         <div class="aaa">
                             Menu Admina
                         </div>
@@ -54,8 +54,8 @@
                 </div>
                 <div class="admin__content col-10">
                     <?php
-          include(__DIR__.'/../actions/loginStatus.php');
-          ?>
+            include(__DIR__ . '/../actions/loginStatus.php');
+            ?>
                     <div class="admin__bar">
                         <div class="admin__bar__status">
                             <div class="admin__bar__item admin__bar__item--type"><span><i class="fas fa-user"></i> Typ účtu</span>
@@ -76,6 +76,7 @@
         <script type="text/javascript">
             $(document).ready(function()
             {
+                $(".modal").modal('show');
                 var request;
                 $(".js-admin-logout").on('click', function(event)
                 {
