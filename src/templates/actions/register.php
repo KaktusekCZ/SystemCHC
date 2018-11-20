@@ -12,7 +12,7 @@ $user_check = "SELECT * FROM chc_users WHERE username ='" . $username . "'";
 $result = mysqli_query($mysqli, $user_check);
 $user = mysqli_fetch_assoc($result);
 $teacher_mail = mysqli_real_escape_string($mysqli, $_POST["email_teacher"]);
-$user_type;
+$teacher_mail_hash = md5(mysqli_real_escape_string($mysqli, $_POST["email_teacher"]));
 if ($usertype == "ucitel") {
     $user_type = 2;
 } else {
@@ -24,11 +24,11 @@ if ($user) {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO chc_users (type, username, name, password, groupID) VALUES ($user_type, '" . $username . "', '" . $name . "', '" . $password_hash . "', '" . $groupid . "')";
     mysqli_query($mysqli, $query);
-    if($user_type == 2){
+    if ($user_type == 2) {
         $res = $mysqli->query("SELECT * FROM chc_users WHERE username ='" . $username . "'");
         $row = $res->fetch_assoc();
         $id = $row['id'];
-        $query = "INSERT INTO chc_teacher (teacher_id, hash, email) VALUES ($id, 'This is hash', '" . $teacher_mail . "')";
+        $query = "INSERT INTO chc_teacher (teacher_id, hash, email) VALUES ($id, '" . $teacher_mail_hash . "', '" . $teacher_mail . "')";
         mysqli_query($mysqli, $query);
     }
     session_start();
@@ -36,7 +36,7 @@ if ($user) {
     $_SESSION['name'] = $name;
     if (!empty($teacher_mail)) {
         require('../phpmailer/index.php');
-        send_mail($teacher_mail);
+        send_mail($teacher_mail, $teacher_mail_hash);
         ob_end_clean();
         echo 4;
     } else {

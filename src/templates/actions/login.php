@@ -6,9 +6,8 @@ $password = $_POST['password'];
 
 $username = $mysqli->real_escape_string($username);
 $password = $mysqli->real_escape_string($password);
-$res = $mysqli->query("SELECT * FROM chc_users INNER JOIN chc_teacher ON chc_users.id = chc_teacher.teacher_id WHERE username ='" . $username . "'");
+$res = $mysqli->query("SELECT * FROM chc_users LEFT JOIN chc_teacher ON chc_users.id = chc_teacher.teacher_id WHERE username ='" . $username . "' ");
 $row = $res->fetch_assoc();
-die(var_dump($row));
 $hash = $row['password'];
 $verify = $row['verify'];
 $email = $row['email'];
@@ -17,7 +16,7 @@ $type = $row['type'];
 $id = $row['id'];
 
 $valid = password_verify($password, $hash);
-if ($verify == "0" && !empty($email)) {
+if ($verify == "0") {
     echo 2;
 } else if ($valid) {
     if (password_needs_rehash($hash, PASSWORD_DEFAULT)) {

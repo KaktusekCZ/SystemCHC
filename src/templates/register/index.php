@@ -160,6 +160,7 @@ if (isset($_SESSION['username'])) {
                             break;
                         case "4":
                             elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Učitel byl vytvořen, prosím ověřte Váš e-mail");
+                            $("#registry")[0].reset();
                             break;
                         default:
                             elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-exclamation-triangle\"></i> " +

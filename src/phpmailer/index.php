@@ -3,7 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function send_mail($teacher_mail){
+function send_mail($teacher_mail, $hash)
+{
     require '../phpmailer/src/Exception.php';
     require '../phpmailer/src/PHPMailer.php';
     require '../phpmailer/src/SMTP.php';
@@ -21,7 +22,7 @@ function send_mail($teacher_mail){
         $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('test@charvatpetr.cz', 'Hodnocení učitele');
+        $mail->setFrom('hodnoceni@creativehill.cz', 'Hodnocení učitele');
         $mail->smtpConnect(
             array(
                 "ssl" => array(
@@ -36,7 +37,7 @@ function send_mail($teacher_mail){
         //Content
         $mail->isHTML(true);
         $mail->Subject = 'Ověření emailu';
-        $mail->Body    = 'Toto je můj mail - ' . $teacher_mail;
+        $mail->Body = '<h1>Toto je můj hash - ' . $teacher_mail . '              ' . $hash . '</h1>';
 
         $mail->send();
         session_unset();
