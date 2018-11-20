@@ -77,7 +77,7 @@ $events = resultToArray($event);
                     </div>
 
                     <div class="admin__votes">
-                        <?php echo '<h1 class="admin__votes__title">Možnosti hodnocení pro '.getAccountGrade($groupRow).'</h1>'?>
+                        <?php echo '<h1 class="admin__votes__title">Hodnocení určená pro '.getAccountGrade($groupRow).'</h1>'?>
                         <ul class="nav nav-tabs" id="votes" role="tablist">
                             <li class="nav-item"><a class="nav-link active" id="votesAvailable-tab" data-toggle="tab" href="#votesAvailable" role="tab" aria-controls="votesAvailable" aria-selected="true">Dostupné hodnocení</a></li>
                             <li class="nav-item"><a class="nav-link" id="votesFinished-tab" data-toggle="tab" href="#votesFinished" role="tab" aria-controls="votesFinished" aria-selected="false">Expirované hodnocení</a></li>
@@ -95,7 +95,7 @@ $events = resultToArray($event);
                                 echo '<div class="admin__votes__item" data-eventID="'.$events[$i]['id'].'">';
                                 echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
                                 echo '<div class="admin__votes__content admin__votes__teacher">'.getTeacherName($mysqli, $events[$i]["teacherID"]).'</div>';
-                                echo '<div class="admin__votes__content admin__votes__time">'.$events[$i]['created'].'</div>';
+                                echo '<div class="admin__votes__content admin__votes__time">'.date("d. m. Y G:i", strtotime($events[$i]['created'])).'</div>';
                                 echo '<div class="admin__votes__content admin__votes__btn-wrapper"><button type="button" class="admin__votes__btn js-admin-vote">Hodnotit <i class="fas fa-chevron-right"></i></button></div>';
                                 echo '</div>';
                             }
@@ -114,7 +114,7 @@ $events = resultToArray($event);
                                 echo '<div class="admin__votes__item">';
                                 echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
                                 echo '<div class="admin__votes__content admin__votes__teacher">'.getTeacherName($mysqli, $events[$i]["teacherID"]).'</div>';
-                                echo '<div class="admin__votes__content admin__votes__time">'.$events[$i]['created'].'</div>';
+                                echo '<div class="admin__votes__content admin__votes__time">'.date("d. m. Y G:i", strtotime($events[$i]['created'])).'</div>';
                                 echo '</div>';
                             }
                         }
@@ -136,6 +136,15 @@ $events = resultToArray($event);
         <script type="text/javascript">
             $(document).ready(function()
             {
+                function alertTimeout(el, time)
+                {
+                    clearTimeout(alert);
+                    alert = setTimeout(function()
+                    {
+                        $('.' + el).removeClass('is-visible').addClass('is-hidden');
+                    }, time);
+                }
+                alertTimeout('alert__topbar', 3000);
                 var request;
                 $(".js-admin-logout").on('click', function(event)
                 {
@@ -201,9 +210,7 @@ $events = resultToArray($event);
                     var time = $.now() / 1000;
                     var dataForm = getFormData($(this));
                     var eventID = $(this).closest('.modal').attr('data-eventid');
-                    var date = new Date();
-                    var timeOffset = date.getTimezoneOffset();
-                    time -= (timeOffset * 60);
+                    console.log(dataForm);
                     request = $.ajax(
                     {
                         url: "../actions/sendVote.php",
@@ -217,7 +224,18 @@ $events = resultToArray($event);
                     });
                     request.done(function(response)
                     {
-                        console.log(response);
+                        if (response == 1)
+                        {
+                            $(".vote-modal").find(".alert").removeClass("is-visible").addClass("is-hidden");
+                            $(".vote-modal").modal("hide");
+                            $(".alert__topbar").html('Hodnocení úspěšně odesláno. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></button>').removeClass("is-hidden").addClass("is-visible");
+                            alertTimeout('alert__topbar', 3000);
+                        }
+                        else
+                        {
+                            $(".vote-modal").find(".alert").removeClass("is-hidden").addClass("is-visible");
+                            console.log(response);
+                        }
                     });
                     request.fail(function(jqXHR, textStatus, errorThrown)
                     {

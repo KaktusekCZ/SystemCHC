@@ -145,6 +145,7 @@ if (isset($_SESSION['username'])) {
                         });
                         request.done(function(response, textStatus, jqXHR)
                         {
+                            console.log(response);
                             switch (response)
                             {
                                 case "1":

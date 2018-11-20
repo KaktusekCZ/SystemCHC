@@ -9,6 +9,12 @@
   '<div class="modal fade vote-modal admin__modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-eventid="'.$id.'">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        <div class="alert alert-danger alert-dismissible fade show mx-0 my-0 is-hidden" role="alert">
+            Vyskytla se neznámá chyba.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
         <h1>Hodnocení k <b>'.$event['header'].'</b></h1>
         <form id="vote-form" action="">
         ';
