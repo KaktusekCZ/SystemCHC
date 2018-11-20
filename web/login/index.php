@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
-  header("Location: ../admin/?status=loggedAuto");
-  die();
+    header("Location: ../admin/?status=loggedAuto");
+    die();
 }
 ?>
 
@@ -29,14 +29,13 @@ if (isset($_SESSION['username'])) {
                     <div class="row">
                         <div class="col-12">
                             <?php
-              include(__DIR__.'/../actions/loginStatus.php');
-              ?>
-                            <div class="login__alert alert alert-danger js-alert-wrongLogin" role="alert">
-                                <i class="fas fa-times"></i> Nesprávné uživatelské jméno nebo heslo.
+                    include(__DIR__ . '/../actions/loginStatus.php');
+                    ?>
+                            <div class="login__alert alert alert-danger js-alert-everything" role="alert">
                             </div>
-
                             <div class="login__alert alert alert-warning js-alert-unknown" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte správce.
+                                <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte
+                                správce.
                             </div>
 
                             <form class="login__form" id="login">
@@ -54,11 +53,12 @@ if (isset($_SESSION['username'])) {
                                     <input type="password" name="password" autocomplete="current-password" class="form-control login__password" placeholder="Heslo" aria-label="Heslo" aria-describedby="login_password" required="required">
                                 </div>
 
-                                <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se</button>
+                                <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se
+                                </button>
 
                             </form>
                             <a class="noacount" href="../register">
-                                Ještě němám účet.
+                                Ještě němám účet
                             </a>
                         </div>
                     </div>
@@ -75,6 +75,7 @@ if (isset($_SESSION['username'])) {
                 var request;
                 $("#login").submit(function(event)
                 {
+                    var elem = $('.js-alert-everything');
                     event.preventDefault();
                     if (request)
                     {
@@ -92,17 +93,21 @@ if (isset($_SESSION['username'])) {
                     });
                     request.done(function(response, textStatus, jqXHR)
                     {
-                        if (response == 1)
+                        console.log(response);
+                        switch (response)
                         {
-                            window.location.href = "../admin/?status=loggedIn";
-                        }
-                        else if (response == 0)
-                        {
-                            $('.js-alert-wrongLogin').addClass('login__alert--visible');
-                        }
-                        else
-                        {
-                            $('.js-alert-unknown').addClass('login__alert--visible');
+                            case "0":
+                                elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Nesprávné uživatelské jméno nebo heslo.");
+                                break;
+                            case "1":
+                                window.location.href = "../admin/?status=loggedIn";
+                                break;
+                            case "2":
+                                elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-times\"></i> Prosím, ověřte si Vaši e-mailovou adresu.");
+                                break;
+                            default:
+                                elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Vyskytla se neznámá chyba");
+                                break;
                         }
                     });
                     request.fail(function(jqXHR, textStatus, errorThrown)

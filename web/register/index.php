@@ -101,7 +101,7 @@ if (isset($_SESSION['username'])) {
                                 </button>
                             </form>
                             <a class="noacount" href="../login">
-                                Již mám učet.
+                                Již mám učet
                             </a>
                         </div>
                     </div>
@@ -119,11 +119,11 @@ if (isset($_SESSION['username'])) {
                 {
                     event.preventDefault();
                     var elem = $('.js-alert-everything');
-                    if ($("input[name=username]").val().length > 16)
+                    if (userlength())
                     {
                         elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Uživatelské jméno je příliš dlouhé");
                     }
-                    else if (getAdressPart($(".teacher__email").val()) != "charvatpetr.cz" && getTeacher())
+                    else if (getAdressPart($(".teacher__email").val()) != "gmail.com" && getTeacher())
                     {
                         elem.addClass('login__alert--visible').html(" <i class=\"fas fa-times\"></i> Chybný učitelský e-mail.");
                     }
@@ -156,10 +156,12 @@ if (isset($_SESSION['username'])) {
                                 case "3":
                                     elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Zadaná hesla se neshodují.");
                                     break;
+                                case "4":
+                                    elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i> Učitel byl vytvořen, prosím ověřte Váš e-mail");
+                                    break;
                                 default:
-                                    console.log(response);
                                     elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-exclamation-triangle\"></i> " +
-                                        "Vyskytla se neznámá chyba. Prosím, kontaktujte správce.");
+                                        "Vyskytla se neznámá chyba. Prosím, kontaktujte správsffgdfdce.");
                             }
                         });
                         request.fail(function(jqXHR, textStatus, errorThrown)
