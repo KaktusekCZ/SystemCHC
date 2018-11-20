@@ -1,14 +1,14 @@
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
-  header("Location: ../admin/?status=loggedAuto");
-  die();
+    header("Location: ../admin/?status=loggedAuto");
+    die();
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -19,58 +19,63 @@ if (isset($_SESSION['username'])) {
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
     <link href="../icons/fontawesome/all.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="login">
-      <div class="login__wrapper">
+</head>
+<body>
+<div class="login">
+    <div class="login__wrapper">
         <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <?php
-              include(__DIR__.'/../actions/loginStatus.php');
-              ?>
-              <div class="login__alert alert alert-danger js-alert-wrongLogin" role="alert">
-                <i class="fas fa-times"></i> Nesprávné uživatelské jméno nebo heslo.
-              </div>
+            <div class="row">
+                <div class="col-12">
+                    <?php
+                    include(__DIR__ . '/../actions/loginStatus.php');
+                    ?>
+                    <div class="login__alert alert alert-danger js-alert-everything" role="alert">
+                    </div>
+                    <div class="login__alert alert alert-warning js-alert-unknown" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte
+                        správce.
+                    </div>
 
-              <div class="login__alert alert alert-warning js-alert-unknown" role="alert">
-                <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte správce.
-              </div>
+                    <form class="login__form" id="login">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="username" autocomplete="username"
+                                   class="form-control login__username" placeholder="Uživatelské jméno"
+                                   aria-label="Uživatelské jméno" aria-describedby="login_username" required="required">
+                        </div>
 
-              <form class="login__form" id="login">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                  </div>
-                  <input type="text" name="username" autocomplete="username" class="form-control login__username" placeholder="Uživatelské jméno" aria-label="Uživatelské jméno" aria-describedby="login_username" required="required">
-                </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" name="password" autocomplete="current-password"
+                                   class="form-control login__password" placeholder="Heslo" aria-label="Heslo"
+                                   aria-describedby="login_password" required="required">
+                        </div>
 
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
-                  </div>
-                  <input type="password" name="password" autocomplete="current-password" class="form-control login__password" placeholder="Heslo" aria-label="Heslo" aria-describedby="login_password" required="required">
-                </div>
+                        <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se
+                        </button>
 
-                <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se</button>
-
-              </form>
-                <a class="noacount" href="../register">
-                    Ještě němám účet.
-                </a>
+                    </form>
+                    <a class="noacount" href="../register">
+                        Ještě němám účet
+                    </a>
                 </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <script src="../js/vendor/jquery-3.3.1.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
+</div>
+</div>
+<script src="../js/vendor/jquery-3.3.1.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
         var request;
-        $("#login").submit(function(event){
+        $("#login").submit(function (event) {
+            var elem = $('.js-alert-everything');
             event.preventDefault();
             if (request) {
                 request.abort();
@@ -84,23 +89,31 @@ if (isset($_SESSION['username'])) {
                 type: "post",
                 data: serializedData
             });
-            request.done(function (response, textStatus, jqXHR){
-              if (response == 1) {
-                window.location.href = "../admin/?status=loggedIn";
-              } else if (response == 0){
-                $('.js-alert-wrongLogin').addClass('login__alert--visible');
-              } else {
-                $('.js-alert-unknown').addClass('login__alert--visible');
-              }
+            request.done(function (response, textStatus, jqXHR) {
+                console.log(response);
+                switch (response) {
+                    case "0":
+                        elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Nesprávné uživatelské jméno nebo heslo.");
+                        break;
+                    case "1":
+                        window.location.href = "../admin/?status=loggedIn";
+                        break;
+                    case "2":
+                        elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-times\"></i> Prosím, ověřte si Vaši e-mailovou adresu.");
+                        break;
+                    default:
+                        elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Vyskytla se neznámá chyba");
+                        break;
+                }
             });
-            request.fail(function (jqXHR, textStatus, errorThrown){
-              $('.js-alert-unknown').addClass('login__alert--visible');
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                $('.js-alert-unknown').addClass('login__alert--visible');
             });
             request.always(function () {
-              $inputs.prop("disabled", false);
+                $inputs.prop("disabled", false);
             });
         });
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>

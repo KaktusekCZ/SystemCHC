@@ -33,6 +33,12 @@ function getAdressPart(str) {
     return str.split('@')[1];
 }
 
+function userlength() {
+    if ($("input[name=username]").val().length > 16) {
+        return true
+    }
+}
+
 function getTeacher() {
     if ($(".select_user_registry").val() == "ucitel") {
         return true;

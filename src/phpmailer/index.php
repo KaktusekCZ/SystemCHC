@@ -3,24 +3,26 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function send_mail($teacher_mail){
+function send_mail($teacher_mail, $hash)
+{
     require '../phpmailer/src/Exception.php';
     require '../phpmailer/src/PHPMailer.php';
     require '../phpmailer/src/SMTP.php';
     $mail = new PHPMailer(true);
+    $mail->CharSet = 'UTF-8';
     try {
         //Server settings
         $mail->SMTPDebug = 2;
         $mail->isSMTP();
-        $mail->Host = 'smtp-190217.m17.wedos.net';
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'test@charvatpetr.cz';
-        $mail->Password = '#FNec3sCZ';
+        $mail->Username = 'pcharvat346@gmail.com';
+        $mail->Password = 'X&\t(4tp2;zae,SA';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('test@charvatpetr.cz', 'Hodnocení učitele');
+        $mail->setFrom('hodnoceni@creativehill.cz', 'Hodnocení učitele');
         $mail->smtpConnect(
             array(
                 "ssl" => array(
@@ -30,18 +32,17 @@ function send_mail($teacher_mail){
                 )
             )
         );
-        $mail->addAddress($teacher_mail, '');     // Add a recipient
+        $mail->addAddress($teacher_mail, '');
 
         //Content
-        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->isHTML(true);
         $mail->Subject = 'Ověření emailu';
-        $mail->Body    = 'Toto je můj mail - ' . $teacher_mail;
+        $mail->Body = '<h1>Toto je můj hash - ' . $teacher_mail . '              ' . $hash . '</h1>';
 
         $mail->send();
         session_unset();
         session_destroy();
         session_write_close();
-        header("Location: ../login/?status=verify");
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
     }

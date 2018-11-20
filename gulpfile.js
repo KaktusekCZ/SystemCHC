@@ -13,7 +13,8 @@ var devPaths = {
     script: 'src/js',
     img: 'src/images',
     fonts: 'src/fonts',
-    icons: 'src/icons'
+    icons: 'src/icons',
+    phpmailer: 'src/phpmailer',
 };
 
 var bootstrapPaths = {
@@ -34,7 +35,8 @@ var webPaths = {
     script: 'web/js',
     img: 'web/images',
     fonts: 'web/fonts',
-    icons: 'web/icons'
+    icons: 'web/icons',
+    phpmailer: 'web/phpmailer',
 };
 
 
@@ -54,6 +56,17 @@ gulp.task('fonts', function() {
             stream: true
         }))
 });
+
+// Duplicate phpmailer folder in webPath
+gulp.task('phpmailer', function() {
+    return gulp.src(devPaths.phpmailer + '/**/*.php')
+        .pipe(gulp.dest(webPaths.phpmailer))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+
+
 
 gulp.task('icons', function() {
     return gulp.src(devPaths.icons + '/**/*')
@@ -144,7 +157,7 @@ gulp.task('bootstrapcss', function() {
 });
 
 // Default Task
-gulp.task('default', ['browserSync', 'fonts', 'icons', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss', 'DBconfig'], function() {
+gulp.task('default', ['browserSync', 'fonts', 'icons', 'imagemin', 'php', 'js', 'sass', 'css', 'bootstrapjs', 'bootstrapcss', 'DBconfig', 'phpmailer'], function() {
     gulp.watch(devPaths.fonts + '**/*', ['fonts']);
     gulp.watch(devPaths.icons + '**/*', ['icons']);
     gulp.watch(devPaths.img + '/**/*.+(png|jpg|jpeg|gif|svg)', ['imagemin']);
@@ -155,4 +168,5 @@ gulp.task('default', ['browserSync', 'fonts', 'icons', 'imagemin', 'php', 'js', 
     gulp.watch(devPaths.styles + '/**/*.css', ['css']);
     gulp.watch(bootstrapPaths.styles + '/**/*.css', ['boostrapcss']);
     gulp.watch(bootstrapPaths.script + '/**/*.js', ['bootstrapjs']);
+    gulp.watch(devPaths.phpmailer + '/**/*.php', ['phpmailer']);
 });

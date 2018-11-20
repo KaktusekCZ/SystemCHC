@@ -35,9 +35,9 @@ function getAccountGrade($group){
 }
 function resultToArray($result) {
     $rows = array();
-    while($row = $result->fetch_assoc()) {
-        $rows[] = $row;
-    }
+//    while($row = $result->fetch_assoc() !== null) {
+//        $rows[] = $row;
+//    }
     return $rows;
 }
 function getTeacherName($mysqli, $teacherID){
