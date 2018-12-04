@@ -37,7 +37,9 @@ function send_mail($teacher_mail, $hash)
         //Content
         $mail->isHTML(true);
         $mail->Subject = 'Ověření emailu';
-        $mail->Body = '<h1>Toto je můj hash - ' . $teacher_mail . '              ' . $hash . '</h1>';
+        $mail->Body = '
+
+        ';
 
         $mail->send();
         session_unset();
