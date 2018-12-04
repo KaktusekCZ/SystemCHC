@@ -13,8 +13,12 @@ $result = mysqli_query($mysqli, $user_check);
 $user = mysqli_fetch_assoc($result);
 $teacher_mail = mysqli_real_escape_string($mysqli, $_POST["email_teacher"]);
 $teacher_mail_hash = md5(mysqli_real_escape_string($mysqli, $_POST["email_teacher"]));
+$final_domain;
 if ($usertype == "ucitel") {
     $user_type = 2;
+    $protocole = $_SERVER['REQUEST_SCHEME'].'://';
+    $host = $_SERVER['HTTP_HOST'] . '/';
+    $final_domain =  $protocole . $host;
 } else {
     $user_type = 1;
 }
@@ -36,7 +40,8 @@ if ($user) {
     $_SESSION['name'] = $name;
     if (!empty($teacher_mail)) {
         require('../phpmailer/index.php');
-        send_mail($teacher_mail, $teacher_mail_hash);
+        ob_start();
+        send_mail($teacher_mail, $teacher_mail_hash, $final_domain);
         ob_end_clean();
         echo 4;
     } else {

@@ -148,6 +148,7 @@ if (isset($_SESSION['username'])) {
                     data: serializedData
                 });
                 request.done(function (response, textStatus, jqXHR) {
+                    console.log(response);
                     switch (response) {
                         case "1":
                             window.location.href = "../admin/?status=loggedIn";
