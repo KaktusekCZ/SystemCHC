@@ -21,10 +21,19 @@
     font-size: 14px;
     height: 64px;
   }
+  &__content{
+    max-width: calc(100% - 320px);
+    margin-left: 320px;
+  }
   &__menu{
     background-color: $gray-color--light-lightest;
     border-right: 1px solid $gray-color--light-light;
     height: 100%;
+    max-width: 320px;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
     ul{
       margin: 0;
       a{

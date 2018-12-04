@@ -122,10 +122,20 @@
   height: 64px;
 }
 
+.admin__content {
+  max-width: calc(100% - 320px);
+  margin-left: 320px;
+}
+
 .admin__menu {
   background-color: #f6f6f6;
   border-right: 1px solid #eaeaea;
   height: 100%;
+  max-width: 320px;
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
 }
 
 .admin__menu ul {
@@ -406,4 +416,17 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eaeaea;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b6b6b6;
+  border-radius: 15px;
 }
