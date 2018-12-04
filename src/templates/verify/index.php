@@ -6,10 +6,10 @@ $row = $res->fetch_assoc();
 $row_hash = $row['hash'];
 $valid = strcmp($row_hash, $hash);
 if (!$valid) {
-    echo "jjjj";
     $mysqli->query("UPDATE chc_teacher SET verify = 1 WHERE hash = '" . $hash . "'");
+    header('Location: ../admin');
 } else {
-    echo "nnn";
+    header('Location: ../login/?status=badVerify');
 }
 ?>
 <!DOCTYPE html>
