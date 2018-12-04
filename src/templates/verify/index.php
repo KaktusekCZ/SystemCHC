@@ -1,7 +1,16 @@
 <?php
 require('../actions/connectDB.php');
-$email = $_GET['email'];
-echo $email;
+$hash = $_GET['code'];
+$res = $mysqli->query("SELECT * FROM chc_teacher WHERE hash = '" . $hash . "'");
+$row = $res->fetch_assoc();
+$row_hash = $row['hash'];
+$valid = strcmp($row_hash, $hash);
+if (!$valid) {
+    echo "jjjj";
+    $mysqli->query("UPDATE chc_teacher SET verify = 1 WHERE hash = '" . $hash . "'");
+} else {
+    echo "nnn";
+}
 ?>
 <!DOCTYPE html>
 <html>
