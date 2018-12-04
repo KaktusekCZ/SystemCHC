@@ -1,3 +1,34 @@
+function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+    $.map(unindexed_array, function(n, i) {
+        indexed_array[n['name']] = n['value'];
+    });
+    return indexed_array;
+}
+
+function getAdressPart(str) {
+    return str.split('@')[1];
+}
+
+function userlength() {
+    if ($("input[name=username]").val().length > 16) {
+        return true
+    }
+}
+
+function getTeacher() {
+    if ($(".select_user_registry").val() == "ucitel") {
+        return true;
+    }
+}
+
+function alertTimeout(el, time) {
+    clearTimeout(alert);
+    alert = setTimeout(function() {
+        $('.' + el).removeClass('is-visible').addClass('is-hidden');
+    }, time);
+}
 $(document).ready(function() {
     var request;
     $('.admin__logout').on('click', function(event) {
@@ -27,29 +58,6 @@ $(document).ready(function() {
             $(".groupidcontainer").css("display", "flex");
         }
     }).trigger("change");
-
-    function getAdressPart(str) {
-        return str.split('@')[1];
-    }
-
-    function userlength() {
-        if ($("input[name=username]").val().length > 16) {
-            return true
-        }
-    }
-
-    function getTeacher() {
-        if ($(".select_user_registry").val() == "ucitel") {
-            return true;
-        }
-    }
-
-    function alertTimeout(el, time) {
-        clearTimeout(alert);
-        alert = setTimeout(function() {
-            $('.' + el).removeClass('is-visible').addClass('is-hidden');
-        }, time);
-    }
 
     alertTimeout('alert__topbar', 3000);
 
@@ -131,13 +139,4 @@ $(document).ready(function() {
             console.log(errorThrown);
         });
     });
-
-    function getFormData($form) {
-        var unindexed_array = $form.serializeArray();
-        var indexed_array = {};
-        $.map(unindexed_array, function(n, i) {
-            indexed_array[n['name']] = n['value'];
-        });
-        return indexed_array;
-    }
 });

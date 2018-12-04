@@ -23,6 +23,7 @@ if (isset($_SESSION['username'])) {
 <body>
 <div class="login">
     <div class="login__wrapper">
+        <div class="login__loader js-login-loader"><div class="login__loader__inner"></div></div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -142,6 +143,7 @@ if (isset($_SESSION['username'])) {
                 var $inputs = $form.find("input, select, button, textarea");
                 var serializedData = $form.serialize();
                 $inputs.prop("disabled", true);
+                $('.js-login-loader').addClass('is-visible');
                 request = $.ajax({
                     url: "../actions/register.php",
                     type: "post",
@@ -174,6 +176,7 @@ if (isset($_SESSION['username'])) {
                 });
                 request.always(function () {
                     $inputs.prop("disabled", false);
+                    $('.js-login-loader').removeClass('is-visible');
                 });
             }
         });
