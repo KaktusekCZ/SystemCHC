@@ -11,3 +11,13 @@
 body{
   font-family: 'Open Sans', sans-serif;
 }
+::-webkit-scrollbar {
+    width: 9px;
+}
+::-webkit-scrollbar-track {
+    background: $gray-color--light-light;
+}
+::-webkit-scrollbar-thumb {
+    background: $gray-color--light-dark;
+    border-radius: 15px;
+}
