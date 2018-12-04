@@ -38,6 +38,13 @@ if (isset($_GET['status'])) {
               <i class="fas fa-times"></i>
             </button>
           </div>';
+  }else if ($query['status'] == 'badVerify') {
+      echo '<div class="alert alert-warning alert-dismissible is-visible alert__topbar fade show" role="alert">
+            Nesprávný ověřovací kód.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>';
   }
 }
 ?>
