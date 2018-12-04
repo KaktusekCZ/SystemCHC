@@ -1,5 +1,7 @@
 <?php
-require(__DIR__ . '/connectDB.php');
+require('../actions/connectDB.php');
+$email = $_GET['email'];
+echo $email;
 ?>
 <!DOCTYPE html>
 <html>
