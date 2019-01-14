@@ -26,5 +26,8 @@
     "workflow"
   ],
   "author": "Yann Isabel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "izitoast": "^1.4.0"
+  }
 }

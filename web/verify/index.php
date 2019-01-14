@@ -7,7 +7,7 @@ $row_hash = $row['hash'];
 $valid = strcmp($row_hash, $hash);
 if (!$valid) {
     $mysqli->query("UPDATE chc_teacher SET verify = 1 WHERE hash = '" . $hash . "'");
-    header('Location: ../admin');
+    header('Location: ../login/?status=goodVerify');
 } else {
     header('Location: ../login/?status=badVerify');
 }
@@ -19,7 +19,6 @@ if (!$valid) {
     </head>
 
     <body>
-        <h1>zfdgzufdigzufdzudifgdfziugi</h1>
     </body>
 
 </html>

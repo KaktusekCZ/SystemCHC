@@ -1,7 +1,7 @@
 function getFormData($form) {
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
-    $.map(unindexed_array, function(n, i) {
+    $.map(unindexed_array, function (n, i) {
         indexed_array[n['name']] = n['value'];
     });
     return indexed_array;
@@ -25,13 +25,33 @@ function getTeacher() {
 
 function alertTimeout(el, time) {
     clearTimeout(alert);
-    alert = setTimeout(function() {
+    alert = setTimeout(function () {
         $('.' + el).removeClass('is-visible').addClass('is-hidden');
     }, time);
 }
-$(document).ready(function() {
+
+function showMessage(message, color) {
+    iziToast.show({
+        title: '',
+        message: message,
+        position: "center",
+        titleColor: 'black',
+        messageColor: 'black',
+        color: color,
+        theme: 'light',
+        overlay: true,
+        overlayClose: true,
+        overlayColor: 'rgba(0, 0, 0, 0.5)',
+        pauseOnHover: true,
+        progressBarColor: color,
+        transitionIn: 'bounceInRight',
+        transitionOut: 'fadeOut',
+    });
+}
+
+$(document).ready(function () {
     var request;
-    $('.admin__logout').on('click', function(event) {
+    $('.admin__logout').on('click', function (event) {
         event.preventDefault();
         if (request) {
             request.abort();
@@ -40,16 +60,16 @@ $(document).ready(function() {
             url: "logout/logout.php",
             type: "post"
         });
-        request.done(function(response, textStatus, jqXHR) {
+        request.done(function (response, textStatus, jqXHR) {
             if (response == 1) {
                 window.location.href = "login/?status=logout";
             }
         });
-        request.fail(function(jqXHR, textStatus, errorThrown) {
+        request.fail(function (jqXHR, textStatus, errorThrown) {
 
         });
     });
-    $(".select_user_registry").change(function() {
+    $(".select_user_registry").change(function () {
         if ($(".select_user_registry").val() == "ucitel") {
             $(".teacher_password").css("display", "flex");
             $(".groupidcontainer").css("display", "none");
@@ -62,7 +82,7 @@ $(document).ready(function() {
     alertTimeout('alert__topbar', 3000);
 
     var request;
-    $(".js-admin-logout").on('click', function(event) {
+    $(".js-admin-logout").on('click', function (event) {
         event.preventDefault();
         if (request) {
             request.abort();
@@ -71,7 +91,7 @@ $(document).ready(function() {
             url: "../actions/logout.php",
             type: "post",
         });
-        request.done(function(response) {
+        request.done(function (response) {
             if (response == 1) {
                 window.location.href = "../login/?status=logout";
             } else {
@@ -79,7 +99,7 @@ $(document).ready(function() {
             }
         });
     });
-    $(".js-admin-vote").on("click", function(event) {
+    $(".js-admin-vote").on("click", function (event) {
         event.preventDefault();
         if (request) {
             request.abort();
@@ -92,18 +112,18 @@ $(document).ready(function() {
                 "id": id
             }
         });
-        request.done(function(response) {
+        request.done(function (response) {
             $("#modal-space").html(response);
             $(".vote-modal").modal("show");
         });
-        request.fail(function(jqXHR, textStatus, errorThrown) {
+        request.fail(function (jqXHR, textStatus, errorThrown) {
             alert("Chyba. Prosím, kontaktujte správce.")
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
         });
     });
-    $(document).on('submit', 'form#vote-form', function() {
+    $(document).on('submit', 'form#vote-form', function () {
         event.preventDefault();
         if (request) {
             request.abort();
@@ -121,7 +141,7 @@ $(document).ready(function() {
                 "eventid": eventID
             }
         });
-        request.done(function(response) {
+        request.done(function (response) {
             if (response == 1) {
                 $(".vote-modal").find(".alert").removeClass("is-visible").addClass("is-hidden");
                 $(".vote-modal").modal("hide");
@@ -132,7 +152,7 @@ $(document).ready(function() {
                 console.log(response);
             }
         });
-        request.fail(function(jqXHR, textStatus, errorThrown) {
+        request.fail(function (jqXHR, textStatus, errorThrown) {
             alert("Chyba. Prosím, kontaktujte správce.")
             console.log(jqXHR);
             console.log(textStatus);

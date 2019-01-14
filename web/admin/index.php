@@ -65,6 +65,7 @@ require(__DIR__.'/../actions/getEvents.php');
         <script src="../js/vendor/jquery-3.3.1.min.js"></script>
         <script src="../js/main.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/iziToast.js"></script>
     </body>
 
 </html>
