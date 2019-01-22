@@ -40,6 +40,7 @@ function showMessage(message, color) {
         color: color,
         theme: 'light',
         overlay: true,
+        timeout: 3000,
         overlayClose: true,
         overlayColor: 'rgba(0, 0, 0, 0.5)',
         pauseOnHover: true,

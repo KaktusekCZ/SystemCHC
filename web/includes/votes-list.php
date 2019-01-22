@@ -12,7 +12,7 @@
             echo '<div class="admin__votes__content admin__votes__teacher">Učitel</div>';
             echo '<div class="admin__votes__content admin__votes__time">Datum vytvoření</div>';
             echo '</div>';
-            for ($i=0; $i < count($events); $i++) {
+            for ($i=0; $i < count((array)$events); $i++) {
                 if($events[$i]['expired'] == 0){
                     echo '<div class="admin__votes__item" data-eventID="'.$events[$i]['id'].'">';
                     echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
@@ -31,7 +31,7 @@
             echo '<div class="admin__votes__content admin__votes__teacher">Učitel</div>';
             echo '<div class="admin__votes__content admin__votes__time">Datum vytvoření</div>';
             echo '</div>';
-            for ($i=0; $i < count($events); $i++) {
+            for ($i=0; $i < count((array)$events); $i++) {
                 if($events[$i]['expired'] == 1){
                     echo '<div class="admin__votes__item">';
                     echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
