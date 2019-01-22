@@ -4,13 +4,13 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login/?status=loginNeeded");
     die();
 }
-require(__DIR__.'/../actions/connectDB.php');
-require(__DIR__.'/../actions/logoutAuto.php');
-require(__DIR__.'/../actions/functions.php');
+require(__DIR__ . '/../actions/connectDB.php');
+require(__DIR__ . '/../actions/logoutAuto.php');
+require(__DIR__ . '/../actions/functions.php');
 
-require(__DIR__.'/../actions/getAccount.php');
-require(__DIR__.'/../actions/getGroup.php');
-require(__DIR__.'/../actions/getEvents.php');
+require(__DIR__ . '/../actions/getAccount.php');
+require(__DIR__ . '/../actions/getGroup.php');
+require(__DIR__ . '/../actions/getEvents.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,24 +34,22 @@ require(__DIR__.'/../actions/getEvents.php');
             <div class="admin__logo">Hodnocení učitelů CHC</div>
             <ul>
                 <?php
-                    if($accRow["type"] == 1){
-                        require(__DIR__.'/../includes/menu--student.php');
-                    }
-                    else if($accRow["type"] == 2){
-                        require(__DIR__.'/../includes/menu--ucitel.php');
-                    }
-                    else if($accRow["type"] == 3){
-                        require(__DIR__.'/../includes/menu--admin.php');
-                    }
+                if ($accRow["type"] == 1) {
+                    require(__DIR__ . '/../includes/menu--student.php');
+                } else if ($accRow["type"] == 2) {
+                    require(__DIR__ . '/../includes/menu--ucitel.php');
+                } else if ($accRow["type"] == 3) {
+                    require(__DIR__ . '/../includes/menu--admin.php');
+                }
                 ?>
             </ul>
         </div>
         <div class="admin__content col-10">
             <?php
-                require(__DIR__.'/../actions/loginStatus.php');
-                require(__DIR__.'/../includes/topbar--default.php');
-                require(__DIR__.'/../includes/votes-list.php');
-                require(__DIR__.'/../includes/my-votes.php');
+            require(__DIR__ . '/../actions/loginStatus.php');
+            require(__DIR__ . '/../includes/topbar--default.php');
+            require(__DIR__ . '/../includes/votes-list.php');
+            require(__DIR__ . '/../includes/my-votes.php');
             ?>
 
             <div id="modal-space">

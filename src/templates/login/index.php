@@ -28,6 +28,7 @@ if (isset($_SESSION['username'])) {
                 <div class="col-12">
                     <?php
                     include(__DIR__ . '/../actions/loginStatus.php');
+                    include (__DIR__ . '/../actions/loginAuto.php')
                     ?>
                     <form class="login__form" id="login">
                         <div class="input-group mb-3">
@@ -46,6 +47,11 @@ if (isset($_SESSION['username'])) {
                             <input type="password" name="password" autocomplete="current-password"
                                    class="form-control login__password" placeholder="Heslo" aria-label="Heslo"
                                    aria-describedby="login_password" required="required">
+                        </div>
+                        <div class="input-group mb-3 rememberme_container">
+                            <input type="checkbox" class="rememberme" id="cbx" name="rememberme" style="display:none"/>
+                            <label for="cbx" class="toggle"><span></span></label>
+                            <span class="text">Pamatovat si mě</span>
                         </div>
 
                         <button type="submit" name="submitButton" class="login__btn btn btn-block py-3">Přihlásit se
