@@ -1,6 +1,2 @@
-<a href="#">
-    <li class="active"><span>Hodnotit</span><i class="fas fa-plus"></i></li>
-</a>
-<a href="#">
-    <li><span>Mé hodnocení</span><i class="fas fa-list-ul"></i></li>
-</a>
+<a class="admin__menu__item nav-link active" id="votes-list-tab" data-toggle="pill" href="#votes-list" role="tab" aria-controls="votes-list" aria-selected="true"><i class="fas fa-plus"></i> Hodnotit</a>
+<a class="admin__menu__item nav-link" id="my-votes-tab" data-toggle="pill" href="#my-votes" role="tab" aria-controls="my-votes" aria-selected="false"><i class="fas fa-list-ul"></i> Mé hodnocení</a>

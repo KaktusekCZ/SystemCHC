@@ -31,8 +31,9 @@ require(__DIR__.'/../actions/getEvents.php');
 <div class="admin">
     <div class="row no-gutters">
         <div class="admin__menu col-2">
-            <div class="admin__logo">Hodnocení učitelů CHC</div>
-            <ul>
+            <img class="admin__logo" src="../images/logo_votes.png" draggable="false">
+
+            <div class="nav" id="main-menu" role="tablist" aria-orientation="vertical">
                 <?php
                     if($accRow["type"] == 1){
                         require(__DIR__.'/../includes/menu--student.php');
@@ -44,15 +45,35 @@ require(__DIR__.'/../actions/getEvents.php');
                         require(__DIR__.'/../includes/menu--admin.php');
                     }
                 ?>
-            </ul>
+            </div>
         </div>
-        <div class="admin__content col-10">
+
+
+        <div class="admin__content col-10 tab-content" id="main-menu-content">
             <?php
                 require(__DIR__.'/../actions/loginStatus.php');
                 require(__DIR__.'/../includes/topbar--default.php');
-                require(__DIR__.'/../includes/votes-list.php');
-                require(__DIR__.'/../includes/my-votes.php');
             ?>
+
+            <div class="tab-pane fade show active" id="votes-list" role="tabpanel" aria-labelledby="votes-list-tab">
+                <?php
+                try {
+                    checkExpiredEvents($mysqli);
+                    $events = null;
+                    require(__DIR__.'/../actions/getEvents.php');
+                } catch(Exception $e) {
+                    echo "Chyba: Nepodařilo se zobrazit dostupné hodnocení. <br>".$e;
+                }finally{
+                   require(__DIR__.'/../includes/votes-list.php');
+                }
+                ?>
+            </div>
+
+            <div class="tab-pane fade" id="my-votes" role="tabpanel" aria-labelledby="my-votes-tab">
+                <?php
+                    require(__DIR__.'/../includes/my-votes.php');
+                ?>
+            </div>
 
             <div id="modal-space">
 

@@ -139,13 +139,10 @@
 }
 
 .admin__logo {
-  text-align: center;
-  padding: 21px;
-  color: #1a1a1a;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 14px;
-  height: 64px;
+  display: block;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .admin__content {
@@ -154,8 +151,7 @@
 }
 
 .admin__menu {
-  background-color: #f6f6f6;
-  border-right: 1px solid #eaeaea;
+  background-color: #343434;
   height: 100%;
   max-width: 320px;
   width: 100%;
@@ -164,51 +160,63 @@
   top: 0px;
 }
 
-.admin__menu ul {
-  margin: 0;
-}
-
-.admin__menu ul a {
-  text-decoration: none;
-}
-
-.admin__menu ul li {
-  color: #4e4e4e;
+.admin__menu__item {
+  width: 100%;
+  color: #fff;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 11px;
   padding: 24px 20px;
+  position: relative;
   -moz-transition: all 200ms;
   -o-transition: all 200ms;
   -webkit-transition: all 200ms;
   transition: all 200ms;
 }
 
-.admin__menu ul li:after {
+.admin__menu__item:after {
   content: '';
   display: table;
   clear: both;
 }
 
-.admin__menu ul li .fas {
+.admin__menu__item:before {
+  content: '';
+  width: 2px;
+  height: 0px;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: #f6e823;
+  -moz-transition: all 200ms;
+  -o-transition: all 200ms;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.admin__menu__item .fas, .admin__menu__item .far {
   font-size: 15px;
   vertical-align: middle;
   margin-right: 20px;
   float: right;
 }
 
-.admin__menu ul li span {
+.admin__menu__item span {
   vertical-align: middle;
 }
 
-.admin__menu ul li.active {
-  border-left: 3px solid #4e4e4e;
-  background-color: #eaeaea;
+.admin__menu__item.active {
+  color: #f6e823;
 }
 
-.admin__menu ul li:hover {
-  background-color: #eaeaea;
+.admin__menu__item:hover {
+  color: #f6e823;
+}
+
+.admin__menu__item:hover:before {
+  height: 100%;
   -moz-transition: all 200ms;
   -o-transition: all 200ms;
   -webkit-transition: all 200ms;
@@ -2497,14 +2505,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #eaeaea;
+  background: #fff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b6b6b6;
+  background: #343434;
   border-radius: 15px;
 }

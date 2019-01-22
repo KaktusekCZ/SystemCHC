@@ -43,7 +43,7 @@ var webPaths = {
 // Browser synchronisation
 gulp.task('browserSync', function() {
     browserSync({
-        proxy: 'localhost/SystemCHC/' + webPaths.tmpl,
+        proxy: 'localhost/weby/SystemCHC/' + webPaths.tmpl,
         port: 8080
     });
 });

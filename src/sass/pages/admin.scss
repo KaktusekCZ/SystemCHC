@@ -13,63 +13,69 @@
     height: 100%;
   }
   &__logo{
-    text-align: center;
-    padding: 21px;
-    color: $gray-color--dark-dark;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 14px;
-    height: 64px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   &__content{
     max-width: calc(100% - 320px);
     margin-left: 320px;
   }
   &__menu{
-    background-color: $gray-color--light-lightest;
-    border-right: 1px solid $gray-color--light-light;
+    background-color: $gray-color--dark-medium;
     height: 100%;
     max-width: 320px;
     width: 100%;
     position: fixed;
     left: 0px;
     top: 0px;
-    ul{
-      margin: 0;
-      a{
-        text-decoration: none;
-      }
-      li{
-        color: $gray-color--dark-light;
+    &__item{
+        width: 100%;
+        color: $white-color;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-size: 11px;
         padding: 24px 20px;
+        position: relative;
         @include transition(all 200ms);
         &:after{
-          content: '';
-          display: table;
-          clear: both;
+            content: '';
+            display: table;
+            clear: both;
         }
-        .fas{
-          font-size: 15px;
-          vertical-align: middle;
-          margin-right: 20px;
-          float: right;
+        &:before{
+            content: '';
+            width: 2px;
+            height: 0px;
+            display: block;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background-color: $primary-color;
+            @include transition(all 200ms);
+        }
+        .fas, .far{
+            font-size: 15px;
+            vertical-align: middle;
+            margin-right: 20px;
+            float: right;
         }
         span{
-          vertical-align: middle;
+            vertical-align: middle;
         }
         &.active{
-          border-left: 3px solid $gray-color--dark-light;
-          background-color: $gray-color--light-light;
+            color: $primary-color;
         }
         &:hover{
-          background-color: $gray-color--light-light;
-          @include transition(all 200ms);
+            color: $primary-color;
+            &:before{
+                height: 100%;
+                @include transition(all 200ms);
+            }
+
         }
-      }
     }
   }
 

@@ -45,4 +45,16 @@ function getTeacherName($mysqli, $teacherID){
   $nameString = $name->fetch_assoc();
   return $nameString["name"];
 }
+function checkExpiredEvents($mysqli){
+    if ($events = $mysqli->query("SELECT created FROM chc_events")) {
+        while ($obj = $events->fetch_object()) {
+            $timestamp = strtotime($obj->created);
+            $currentTimestamp = time();
+
+            if(($currentTimestamp - $timestamp) > 86400){
+                $mysqli->query("UPDATE chc_events SET expired = 1 WHERE created = '".$obj->created."'");
+            }
+        }
+    }
+}
 ?>
