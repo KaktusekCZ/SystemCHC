@@ -31,13 +31,6 @@ if (isset($_SESSION['username'])) {
                             <?php
                     include(__DIR__ . '/../actions/loginStatus.php');
                     ?>
-                            <div class="login__alert alert alert-danger js-alert-everything" role="alert">
-                            </div>
-                            <div class="login__alert alert alert-warning js-alert-unknown" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i> Vyskytla se neznámá chyba. Prosím, kontaktujte
-                                správce.
-                            </div>
-
                             <form class="login__form" id="login">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -69,21 +62,22 @@ if (isset($_SESSION['username'])) {
         <script src="../js/vendor/jquery-3.3.1.min.js"></script>
         <script src="../js/main.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/iziToast.js"></script>
         <script type="text/javascript">
             $(document).ready(function()
             {
-                var request;
+                let request;
                 $("#login").submit(function(event)
                 {
-                    var elem = $('.js-alert-everything');
+                    // var elem = $('.js-alert-everything');
                     event.preventDefault();
                     if (request)
                     {
                         request.abort();
                     }
-                    var $form = $(this);
-                    var $inputs = $form.find("input, select, button, textarea");
-                    var serializedData = $form.serialize();
+                    let $form = $(this);
+                    let $inputs = $form.find("input, select, button, textarea");
+                    let serializedData = $form.serialize();
                     $inputs.prop("disabled", true);
                     request = $.ajax(
                     {
@@ -97,22 +91,22 @@ if (isset($_SESSION['username'])) {
                         switch (response)
                         {
                             case "0":
-                                elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Nesprávné uživatelské jméno nebo heslo.");
+                                showMessage("Nesprávné uživatelské jméno nebo heslo.", "red");
                                 break;
                             case "1":
                                 window.location.href = "../admin/?status=loggedIn";
                                 break;
                             case "2":
-                                elem.addClass('login__alert--visible').removeClass("alert-danger").addClass("alert-warning").html("<i class=\"fas fa-times\"></i> Prosím, ověřte si Vaši e-mailovou adresu.");
+                                showMessage("Prosím, ověřte si Vaši e-mailovou adresu.", "yellow");
                                 break;
                             default:
-                                elem.addClass('login__alert--visible').html("<i class=\"fas fa-times\"></i>Vyskytla se neznámá chyba");
+                                showMessage("Vyskytla se neznámá chyba", "red");
                                 break;
                         }
                     });
                     request.fail(function(jqXHR, textStatus, errorThrown)
                     {
-                        $('.js-alert-unknown').addClass('login__alert--visible');
+                        showMessage("Vyskytla se neznámá chyba. Prosím, kontaktujte správce", "red");
                     });
                     request.always(function()
                     {
