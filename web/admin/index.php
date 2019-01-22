@@ -53,6 +53,7 @@ require(__DIR__.'/../actions/getEvents.php');
                 require(__DIR__.'/../actions/loginStatus.php');
                 require(__DIR__.'/../includes/topbar--default.php');
                 require(__DIR__.'/../includes/votes-list.php');
+                require(__DIR__.'/../includes/my-votes.php');
             ?>
 
                     <div id="modal-space">
