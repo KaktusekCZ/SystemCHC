@@ -1,8 +1,8 @@
 .is-visible{
-    display: block;
+  display: block;
 }
 .is-hidden{
-    display: none;
+  display: none;
 }
 .admin{
   width: 100%;
@@ -31,51 +31,51 @@
     left: 0px;
     top: 0px;
     &__item{
-        width: 100%;
-        color: $white-color;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 11px;
-        padding: 24px 20px;
-        position: relative;
+      width: 100%;
+      color: $white-color;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 11px;
+      padding: 24px 20px;
+      position: relative;
+      @include transition(all 200ms);
+      &:after{
+        content: '';
+        display: table;
+        clear: both;
+      }
+      &:before{
+        content: '';
+        width: 2px;
+        height: 0px;
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-color: $primary-color;
         @include transition(all 200ms);
-        &:after{
-            content: '';
-            display: table;
-            clear: both;
-        }
+      }
+      .fas, .far{
+        font-size: 15px;
+        vertical-align: middle;
+        margin-right: 20px;
+        float: right;
+      }
+      span{
+        vertical-align: middle;
+      }
+      &.active{
+        color: $primary-color;
+      }
+      &:hover{
+        color: $primary-color;
         &:before{
-            content: '';
-            width: 2px;
-            height: 0px;
-            display: block;
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            background-color: $primary-color;
-            @include transition(all 200ms);
+          height: 100%;
+          @include transition(all 200ms);
         }
-        .fas, .far{
-            font-size: 15px;
-            vertical-align: middle;
-            margin-right: 20px;
-            float: right;
-        }
-        span{
-            vertical-align: middle;
-        }
-        &.active{
-            color: $primary-color;
-        }
-        &:hover{
-            color: $primary-color;
-            &:before{
-                height: 100%;
-                @include transition(all 200ms);
-            }
 
-        }
+      }
     }
   }
 
@@ -144,18 +144,18 @@
       font-weight: 600;
     }
     &__expire{
-        font-size: 12px;
-        margin: 30px 0px;
-        font-weight: 600;
-        color: $gray-color--dark-dark;
-        text-transform: uppercase;
-        border-left: 2px solid $gray-color--dark-dark;
-        background-color: $gray-color--light-lightest;
-        padding: 10px 14px;
-        display: table;
-        .fas{
-            margin-right: 10px;
-        }
+      font-size: 12px;
+      margin: 30px 0px;
+      font-weight: 600;
+      color: $gray-color--dark-dark;
+      text-transform: uppercase;
+      border-left: 2px solid $gray-color--dark-dark;
+      background-color: $gray-color--light-lightest;
+      padding: 10px 14px;
+      display: table;
+      .fas{
+        margin-right: 10px;
+      }
     }
     &__item{
       width: 100%;

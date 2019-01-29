@@ -7,7 +7,6 @@ if (!isset($_SESSION['username'])) {
 require(__DIR__ . '/../actions/connectDB.php');
 require(__DIR__ . '/../actions/logoutAuto.php');
 require(__DIR__ . '/../actions/functions.php');
-
 require(__DIR__ . '/../actions/getAccount.php');
 require(__DIR__ . '/../actions/getGroup.php');
 require(__DIR__ . '/../actions/getEvents.php');
@@ -52,30 +51,12 @@ require(__DIR__ . '/../actions/getEvents.php');
                     <?php
             require(__DIR__ . '/../actions/loginStatus.php');
             require(__DIR__ . '/../includes/topbar--default.php');
-            require(__DIR__ . '/../includes/votes-list.php');
-            require(__DIR__ . '/../includes/my-votes.php');
+            if($accRow["type"] == 1){
+                require (__DIR__ . '/../includes/content--student.php');
+            }elseif ($accRow["type"] == 2){
+                require (__DIR__ . '/../includes/content--teacher.php');
+            }
             ?>
-
-                    <div class="tab-pane fade show active" id="votes-list" role="tabpanel" aria-labelledby="votes-list-tab">
-                        <?php
-                try {
-                    checkExpiredEvents($mysqli);
-                    $events = null;
-                    require(__DIR__.'/../actions/getEvents.php');
-                } catch(Exception $e) {
-                    echo "Chyba: Nepodařilo se zobrazit dostupné hodnocení. <br>".$e;
-                }finally{
-                   require(__DIR__.'/../includes/votes-list.php');
-                }
-                ?>
-                    </div>
-
-                    <div class="tab-pane fade" id="my-votes" role="tabpanel" aria-labelledby="my-votes-tab">
-                        <?php
-                    require(__DIR__.'/../includes/my-votes.php');
-                ?>
-                    </div>
-
                     <div id="modal-space">
 
                     </div>
