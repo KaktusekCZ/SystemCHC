@@ -23,6 +23,13 @@ if ($verify == "0") {
         $newHash = password_hash($password, PASSWORD_DEFAULT);
         $mysqli->query("UPDATE chc_users SET password = '" . $newHash . "' WHERE username = '" . $username . "'");
     }
+    if (isset($_POST["rememberme"])) {
+        setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60), "/");
+        setcookie("password", $valid, time() + (10 * 365 * 24 * 60 * 60), "/");
+    } else {
+        setcookie("username", "", time(), "/");
+        setcookie("password", "", time(), "/");
+    }
     session_start();
     $_SESSION['username'] = $username;
     $_SESSION['name'] = $name;

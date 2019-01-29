@@ -51,25 +51,6 @@ function showMessage(message, color) {
 }
 
 $(document).ready(function () {
-    var request;
-    $('.admin__logout').on('click', function (event) {
-        event.preventDefault();
-        if (request) {
-            request.abort();
-        }
-        request = $.ajax({
-            url: "logout/logout.php",
-            type: "post"
-        });
-        request.done(function (response, textStatus, jqXHR) {
-            if (response == 1) {
-                window.location.href = "login/?status=logout";
-            }
-        });
-        request.fail(function (jqXHR, textStatus, errorThrown) {
-
-        });
-    });
     $(".select_user_registry").change(function () {
         if ($(".select_user_registry").val() == "ucitel") {
             $(".teacher_password").css("display", "flex");
@@ -95,8 +76,6 @@ $(document).ready(function () {
         request.done(function (response) {
             if (response == 1) {
                 window.location.href = "../login/?status=logout";
-            } else {
-                alert('chyba');
             }
         });
     });

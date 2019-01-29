@@ -109,6 +109,84 @@
   text-align: center;
 }
 
+.login .rememberme_container {
+  align-items: center;
+}
+
+.login .rememberme_container .text {
+  margin-left: 10px;
+}
+
+.login .toggle {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+  margin-bottom: 0;
+}
+
+.login .toggle:before {
+  content: "";
+  position: relative;
+  top: 3px;
+  left: 3px;
+  width: 34px;
+  height: 14px;
+  display: block;
+  background: #4e4e4e;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.login .toggle span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: #b6b6b6;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.login .toggle span.text {
+  margin-left: 10px;
+}
+
+.login .toggle span:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: -18px;
+  width: 56px;
+  height: 56px;
+  background: #495057;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.login #cbx:checked + .toggle:before {
+  background: #495057;
+}
+
+.login #cbx:checked + .toggle span {
+  background: #f6e823;
+  transform: translateX(20px);
+  transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+}
+
+.login #cbx:checked + .toggle span:before {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
 .login select {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -290,13 +368,28 @@
 
 .admin__votes__title {
   font-size: 18px;
-  margin-bottom: 40px;
   color: #1a1a1a;
   background-color: #f6e823;
   display: table;
   padding: 12px 25px;
   border-radius: 3px;
   font-weight: 600;
+}
+
+.admin__votes__expire {
+  font-size: 12px;
+  margin: 30px 0px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  border-left: 2px solid #1a1a1a;
+  background-color: #f6f6f6;
+  padding: 10px 14px;
+  display: table;
+}
+
+.admin__votes__expire .fas {
+  margin-right: 10px;
 }
 
 .admin__votes__item {

@@ -136,13 +136,26 @@
     padding: 3% 13%;
     &__title{
       font-size: 18px;
-      margin-bottom: 40px;
       color: $gray-color--dark-dark;
       background-color: $primary-color;
       display: table;
       padding: 12px 25px;
       border-radius: 3px;
       font-weight: 600;
+    }
+    &__expire{
+        font-size: 12px;
+        margin: 30px 0px;
+        font-weight: 600;
+        color: $gray-color--dark-dark;
+        text-transform: uppercase;
+        border-left: 2px solid $gray-color--dark-dark;
+        background-color: $gray-color--light-lightest;
+        padding: 10px 14px;
+        display: table;
+        .fas{
+            margin-right: 10px;
+        }
     }
     &__item{
       width: 100%;

@@ -1,5 +1,6 @@
 <div class="admin__votes">
     <?php echo '<h1 class="admin__votes__title">Hodnocení pro '.getAccountGrade($groupRow).'</h1>'?>
+    <h2 class="admin__votes__expire"><i class="fas fa-exclamation"></i> Každé hodnocení je dostupné pouze 24 hodin!</h2>
     <ul class="nav nav-tabs" id="votes" role="tablist">
         <li class="nav-item"><a class="nav-link active" id="votesAvailable-tab" data-toggle="tab" href="#votesAvailable" role="tab" aria-controls="votesAvailable" aria-selected="true">Dostupné hodnocení</a></li>
         <li class="nav-item"><a class="nav-link" id="votesFinished-tab" data-toggle="tab" href="#votesFinished" role="tab" aria-controls="votesFinished" aria-selected="false">Expirované hodnocení</a></li>
