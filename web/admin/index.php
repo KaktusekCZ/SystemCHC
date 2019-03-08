@@ -26,6 +26,7 @@ require(__DIR__ . '/../actions/getEvents.php');
         <link href="../icons/fontawesome/all.min.css" rel="stylesheet">
         <link href="../css/main.css" rel="stylesheet">
         <link rel="icon" href="../images/favicon.ico" type="image/x-icon" sizes="16x16">
+        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
@@ -60,11 +61,9 @@ require(__DIR__ . '/../actions/getEvents.php');
                     <div id="modal-space">
 
                     </div>
-
                 </div>
             </div>
         </div>
-        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
         <script src="../js/main.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/iziToast.js"></script>

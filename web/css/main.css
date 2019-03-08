@@ -526,6 +526,19 @@
   cursor: pointer;
 }
 
+.admin__edit .accordion .card-header__btn__delete {
+  border-bottom: 3px solid #d32535;
+  background-color: #dc3545;
+  color: #fff;
+  margin-right: 15px;
+}
+
+.admin__edit .accordion .card-header__btn__delete:hover {
+  background-color: #e04b59 !important;
+  border-bottom: 3px solid #dc3545 !important;
+  color: #fff !important;
+}
+
 .admin__edit .accordion .card-header__btn:hover {
   text-decoration: none;
   color: inherit;
@@ -538,6 +551,15 @@
 
 .admin__edit .accordion .card-header__btn .fas {
   margin-left: 15px;
+}
+
+.admin__edit .accordion .card-body .row {
+  width: 100%;
+}
+
+.admin__edit .accordion .card-body .row form {
+  width: 100%;
+  display: flex;
 }
 
 .admin__edit .accordion .card-body .send {

@@ -14,6 +14,14 @@ if (isset($_GET['status'])) {
             $message = "Byl/a jste úspěšně přihlášen/a.";
             $color = 'green';
             break;
+        case 'userEdited':
+            $message = "Uživatel byl úspěšně upraven.";
+            $color = 'green';
+            break;
+        case 'userDeleted':
+            $message = "Uživatel byl úspěšně smazán.";
+            $color = 'green';
+            break;
         case 'logout':
             $message = "Byl/a jste odhlášen/a.";
             $color = 'green';
