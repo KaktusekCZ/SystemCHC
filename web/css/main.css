@@ -470,6 +470,17 @@
   margin-left: 15px;
 }
 
+.admin__votes__btn--voted {
+  background-color: transparent;
+  cursor: default;
+  color: #1a1a1a;
+}
+
+.admin__votes__btn--voted:hover {
+  color: #1a1a1a;
+  background-color: transparent;
+}
+
 .admin__modal .modal-content {
   padding: 30px 25px;
   border: 0;

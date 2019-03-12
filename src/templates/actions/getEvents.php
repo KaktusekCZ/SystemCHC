@@ -10,4 +10,5 @@ $event = $mysqli->query($query);
 while($eventRow = $event->fetch_assoc()){
     $events[] = $eventRow;
 }
+
 ?>

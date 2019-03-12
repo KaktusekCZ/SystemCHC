@@ -51,8 +51,6 @@ require(__DIR__ . '/../actions/getEvents.php');
             <?php
             require(__DIR__ . '/../actions/loginStatus.php');
             require(__DIR__ . '/../includes/topbar--default.php');
-            require(__DIR__ . '/../includes/votes-list.php');
-            require(__DIR__ . '/../includes/my-votes.php');
             ?>
 
             <div class="tab-pane fade show active" id="votes-list" role="tabpanel" aria-labelledby="votes-list-tab">
@@ -64,7 +62,8 @@ require(__DIR__ . '/../actions/getEvents.php');
                 } catch(Exception $e) {
                     echo "Chyba: Nepodařilo se zobrazit dostupné hodnocení. <br>".$e;
                 }finally{
-                   require(__DIR__.'/../includes/votes-list.php');
+                    require(__DIR__.'/../actions/getVotedEvents.php');
+                    require(__DIR__.'/../includes/votes-list.php');
                 }
                 ?>
             </div>
@@ -86,5 +85,11 @@ require(__DIR__ . '/../actions/getEvents.php');
 <script src="../js/main.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/iziToast.js"></script>
+<script type="text/javascript">
+    document.addEventListener('iziToast-closing', function(data){
+        //console.log(document.title);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    });
+</script>
 </body>
 </html>
