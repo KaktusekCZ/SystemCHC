@@ -1,3 +1,7 @@
+<?php
+    require(__DIR__ . '/../actions/getVotedEvents.php');
+?>
+
 <div class="admin__votes">
     <?php echo '<h1 class="admin__votes__title">Hodnocení pro '.getAccountGrade($groupRow).'</h1>'?>
     <h2 class="admin__votes__expire"><i class="fas fa-exclamation"></i> Každé hodnocení je dostupné pouze 24 hodin od vytvoření</h2>
