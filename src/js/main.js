@@ -122,7 +122,6 @@ $(document).ready(function () {
         var time = $.now() / 1000;
         var dataForm = getFormData($(this));
         var eventID = $(this).closest('.modal').attr('data-eventid');
-        console.log(dataForm);
         request = $.ajax({
             url: "../actions/sendVote.php",
             type: "post",

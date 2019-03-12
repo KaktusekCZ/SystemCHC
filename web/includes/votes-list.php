@@ -1,6 +1,10 @@
+<?php
+    require(__DIR__ . '/../actions/getVotedEvents.php');
+?>
+
 <div class="admin__votes">
     <?php echo '<h1 class="admin__votes__title">Hodnocení pro '.getAccountGrade($groupRow).'</h1>'?>
-    <h2 class="admin__votes__expire"><i class="fas fa-exclamation"></i> Každé hodnocení je dostupné pouze 24 hodin!</h2>
+    <h2 class="admin__votes__expire"><i class="fas fa-exclamation"></i> Každé hodnocení je dostupné pouze 24 hodin od vytvoření</h2>
     <ul class="nav nav-tabs" id="votes" role="tablist">
         <li class="nav-item"><a class="nav-link active" id="votesAvailable-tab" data-toggle="tab" href="#votesAvailable" role="tab" aria-controls="votesAvailable" aria-selected="true">Dostupné hodnocení</a></li>
         <li class="nav-item"><a class="nav-link" id="votesFinished-tab" data-toggle="tab" href="#votesFinished" role="tab" aria-controls="votesFinished" aria-selected="false">Expirované hodnocení</a></li>
@@ -19,7 +23,21 @@
                     echo '<div class="admin__votes__content admin__votes__header">'.$events[$i]['header'].'</div>';
                     echo '<div class="admin__votes__content admin__votes__teacher">'.getTeacherName($mysqli, $events[$i]["teacherID"]).'</div>';
                     echo '<div class="admin__votes__content admin__votes__time">'.date("d. m. Y G:i", strtotime($events[$i]['created'])).'</div>';
-                    echo '<div class="admin__votes__content admin__votes__btn-wrapper"><button type="button" class="admin__votes__btn js-admin-vote">Hodnotit <i class="fas fa-chevron-right"></i></button></div>';
+
+                    if (isset($votedEvents)) {
+                        for ($y=0; $y < count((array)$votedEvents); $y++) {
+                            if($votedEvents[$y]['eventID'] == $events[$i]['id']){
+                                $btn = '<div class="admin__votes__content admin__votes__btn-wrapper"><button type="button" class="admin__votes__btn admin__votes__btn--voted">Splněno <i class="fas fa-check"></i></button></div>';
+                                break;
+                            } else {
+                                $btn = '<div class="admin__votes__content admin__votes__btn-wrapper"><button type="button" class="admin__votes__btn js-admin-vote">Hodnotit <i class="fas fa-chevron-right"></i></button></div>';
+                            }
+                        }
+                    } else {
+                        $btn = '<div class="admin__votes__content admin__votes__btn-wrapper"><button type="button" class="admin__votes__btn js-admin-vote">Hodnotit <i class="fas fa-chevron-right"></i></button></div>';
+                    }
+
+                    echo $btn;
                     echo '</div>';
                 }
             }

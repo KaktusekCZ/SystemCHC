@@ -470,7 +470,16 @@
   margin-left: 15px;
 }
 
-.admin__edit {
+.admin__votes__btn--voted {
+  background-color: transparent;
+  cursor: default;
+  color: #1a1a1a;
+}
+
+.admin__votes__btn--voted:hover {
+  color: #1a1a1a;
+  background-color: transparent;
+}.admin__edit {
   padding: 3% 13%;
 }
 

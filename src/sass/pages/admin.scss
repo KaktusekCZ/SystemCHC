@@ -265,6 +265,15 @@
       .fas {
         margin-left: 15px;
       }
+      &--voted{
+          background-color: transparent;
+          cursor: default;
+          color: $gray-color--dark-dark;
+          &:hover{
+              color: $gray-color--dark-dark;
+              background-color: transparent;
+          }
+      }
     }
   }
 

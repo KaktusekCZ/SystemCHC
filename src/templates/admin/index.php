@@ -59,6 +59,7 @@ require(__DIR__ . '/../actions/getEvents.php');
                 require (__DIR__ . '/../includes/content--admin.php');
             }
             ?>
+
             <div id="modal-space">
 
             </div>
@@ -68,5 +69,11 @@ require(__DIR__ . '/../actions/getEvents.php');
 <script src="../js/main.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/iziToast.js"></script>
+<script type="text/javascript">
+    document.addEventListener('iziToast-closing', function(data){
+        //console.log(document.title);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    });
+</script>
 </body>
 </html>

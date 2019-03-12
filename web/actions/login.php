@@ -14,7 +14,6 @@ $email = $row['email'];
 $name = $row['name'];
 $type = $row['type'];
 $id = $row['id'];
-
 $valid = password_verify($password, $hash);
 if ($verify == "0") {
     echo 2;

@@ -31,7 +31,7 @@ if (isset($_GET['status'])) {
             $color = 'yellow';
             break;
         case 'loginNeeded':
-            $message = "Byl/a jste automaticky odhlášen/a po 45 minutách neaktivity.";
+            $message = "Je potřeba se znovu přihlásit.";
             $color = 'yellow';
             break;
         case 'badVerify':
