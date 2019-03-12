@@ -30,6 +30,14 @@ function alertTimeout(el, time) {
     }, time);
 }
 
+function deleteGetParameter() {
+    var uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+        var clean_uri = uri.substring(0, uri.indexOf("?"));
+        window.history.replaceState({}, document.title, clean_uri);
+    }
+}
+
 function showMessage(message, color) {
     iziToast.show({
         title: '',
@@ -47,6 +55,9 @@ function showMessage(message, color) {
         progressBarColor: color,
         transitionIn: 'bounceInRight',
         transitionOut: 'fadeOut',
+        onClosed: function () {
+            deleteGetParameter();
+        }
     });
 }
 

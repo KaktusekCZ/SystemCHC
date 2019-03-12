@@ -1,28 +1,34 @@
-.is-visible{
-    display: block;
+.is-visible {
+  display: block;
 }
-.is-hidden{
-    display: none;
+
+.is-hidden {
+  display: none;
 }
-.admin{
+
+.admin {
   width: 100%;
   height: 100%;
   position: absolute;
   background-color: $white-color;
-  &>.row{
+
+  & > .row {
     height: 100%;
   }
-  &__logo{
+
+  &__logo {
     display: block;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  &__content{
+
+  &__content {
     max-width: calc(100% - 320px);
     margin-left: 320px;
   }
-  &__menu{
+
+  &__menu {
     background-color: $gray-color--dark-medium;
     height: 100%;
     max-width: 320px;
@@ -30,73 +36,85 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    &__item{
-        width: 100%;
-        color: $white-color;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 11px;
-        padding: 24px 20px;
-        position: relative;
-        @include transition(all 200ms);
-        &:after{
-            content: '';
-            display: table;
-            clear: both;
-        }
-        &:before{
-            content: '';
-            width: 2px;
-            height: 0px;
-            display: block;
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            background-color: $primary-color;
-            @include transition(all 200ms);
-        }
-        .fas, .far{
-            font-size: 15px;
-            vertical-align: middle;
-            margin-right: 20px;
-            float: right;
-        }
-        span{
-            vertical-align: middle;
-        }
-        &.active{
-            color: $primary-color;
-        }
-        &:hover{
-            color: $primary-color;
-            &:before{
-                height: 100%;
-                @include transition(all 200ms);
-            }
 
+    &__item {
+      width: 100%;
+      color: $white-color;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 11px;
+      padding: 24px 20px;
+      position: relative;
+      @include transition(all 200ms);
+
+      &:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: '';
+        width: 2px;
+        height: 0px;
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-color: $primary-color;
+        @include transition(all 200ms);
+      }
+
+      .fas, .far {
+        font-size: 15px;
+        vertical-align: middle;
+        margin-right: 20px;
+        float: right;
+      }
+
+      span {
+        vertical-align: middle;
+      }
+
+      &.active {
+        color: $primary-color;
+      }
+
+      &:hover {
+        color: $primary-color;
+
+        &:before {
+          height: 100%;
+          @include transition(all 200ms);
         }
+
+      }
     }
   }
 
-  &__bar{
+  &__bar {
     width: 100%;
     padding: 15px 0px;
     background-color: $gray-color--light-lightest;
     border-bottom: 1px solid darken($gray-color--light-lightest, 5%);
-    &:after{
+
+    &:after {
       content: '';
       display: table;
       clear: both;
     }
-    &__status{
+
+    &__status {
       float: right;
     }
-    &__item{
+
+    &__item {
       margin-right: 30px;
       display: inline-block;
       vertical-align: middle;
-      &>.header{
+
+      & > .header {
         font-size: 11px;
         padding: 7px 14px;
         background-color: $primary-color;
@@ -108,7 +126,8 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-      &--logout{
+
+      &--logout {
         padding: 5px 10px;
         background-color: $red-color;
         border-radius: 3px;
@@ -118,13 +137,16 @@
         cursor: pointer;
         border-bottom: 3px solid darken($red-color, 5%);
         padding-top: 7px;
-        .fas{
+
+        .fas {
           margin-left: 10px;
         }
-        &>span{
+
+        & > span {
           vertical-align: middle;
         }
-        &:hover{
+
+        &:hover {
           background-color: lighten($red-color, 5%);
           border-bottom: 3px solid $red-color;
         }
@@ -132,9 +154,10 @@
     }
   }
 
-  &__votes{
+  &__votes {
     padding: 3% 13%;
-    &__title{
+
+    &__title {
       font-size: 18px;
       color: $gray-color--dark-dark;
       background-color: $primary-color;
@@ -143,64 +166,78 @@
       border-radius: 3px;
       font-weight: 600;
     }
-    &__expire{
-        font-size: 12px;
-        margin: 30px 0px;
-        font-weight: 600;
-        color: $gray-color--dark-dark;
-        text-transform: uppercase;
-        border-left: 2px solid $gray-color--dark-dark;
-        background-color: $gray-color--light-lightest;
-        padding: 10px 14px;
-        display: table;
-        .fas{
-            margin-right: 10px;
-        }
+
+    &__expire {
+      font-size: 12px;
+      margin: 30px 0px;
+      font-weight: 600;
+      color: $gray-color--dark-dark;
+      text-transform: uppercase;
+      border-left: 2px solid $gray-color--dark-dark;
+      background-color: $gray-color--light-lightest;
+      padding: 10px 14px;
+      display: table;
+
+      .fas {
+        margin-right: 10px;
+      }
     }
-    &__item{
+
+    &__item {
       width: 100%;
       padding: 30px 0px;
       background-color: $white-color;
-      &:nth-child(2n){
+
+      &:nth-child(2n) {
         background-color: $gray-color--light-lightest;
       }
-      &:first-of-type{
+
+      &:first-of-type {
         border-radius: 3px 3px 0px 0px;
       }
-      &:last-of-type{
+
+      &:last-of-type {
         border-radius: 0px 0px 3px 3px;
       }
-      &--header{
+
+      &--header {
         background-color: $white-color;
         padding: 10px 0px;
         color: $gray-color--medium-medium;
         border-bottom: 1px solid #dee2e6;
-        .admin__votes__header{
+
+        .admin__votes__header {
           color: $gray-color--medium-medium;
           font-weight: 400;
         }
       }
     }
-    &__content{
+
+    &__content {
       display: inline-block;
       width: 25%;
       padding-left: 20px;
       vertical-align: middle;
       color: $gray-color--medium-dark;
     }
-    &__header{
+
+    &__header {
       color: $gray-color--dark-dark;
       font-weight: 600;
     }
-    &__teacher{
+
+    &__teacher {
     }
-    &__time{
+
+    &__time {
     }
-    &__btn-wrapper{
+
+    &__btn-wrapper {
       text-align: right;
       padding-right: 20px;
     }
-    &__btn{
+
+    &__btn {
       text-align: right;
       background-color: $primary-color;
       color: $gray-color--dark-dark;
@@ -214,15 +251,18 @@
       border: 0px;
       outline: 0;
       cursor: pointer;
-      &:hover{
+
+      &:hover {
         text-decoration: none;
         color: inherit;
         background-color: lighten($primary-color, 15%);
       }
-      &:focus{
+
+      &:focus {
         outline: 0;
       }
-      .fas{
+
+      .fas {
         margin-left: 15px;
       }
       &--voted{
@@ -237,18 +277,118 @@
     }
   }
 
-  &__modal{
-    .modal-content{
+  &__edit {
+    padding: 3% 13%;
+
+    .admin__votes__title {
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      height: 38px;
+    }
+
+    .accordion {
+      .card {
+        margin-bottom: 5px;
+
+        &-header {
+          .col-md-4 {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+            &:last-of-type {
+              justify-content: flex-end;
+            }
+
+            &:first-of-type {
+              justify-content: flex-start;
+            }
+          }
+
+          align-items: center;
+
+          h2 {
+            font-size: 18px;
+            font-weight: bolder;
+            margin-bottom: 0;
+          }
+
+          &__btn {
+            text-align: right;
+            background-color: $primary-color;
+            color: $gray-color--dark-dark;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            display: inline-block;
+            width: auto;
+            padding: 10px 15px;
+            border-radius: 3px;
+            border: 0px;
+            outline: 0;
+            cursor: pointer;
+            &__delete{
+              border-bottom: 3px solid darken($red-color, 5%);
+              background-color: $red-color;
+              color: #fff;
+              margin-right: 15px;
+              &:hover {
+                background-color: lighten($red-color, 5%) !important;
+                border-bottom: 3px solid $red-color !important;
+                color: #fff !important;
+              }
+            }
+
+            &:hover {
+              text-decoration: none;
+              color: inherit;
+              background-color: lighten($primary-color, 15%);
+            }
+
+            &:focus {
+              outline: 0;
+            }
+
+            .fas {
+              margin-left: 15px;
+            }
+          }
+        }
+
+        &-body {
+          .row{
+            width: 100%;
+            form {
+              width: 100%;
+              display: flex;
+            }
+          }
+
+          .send {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+  }
+
+  &__modal {
+    .modal-content {
       padding: 30px 25px;
       border: 0;
       border-radius: 3px;
     }
-    h1{
+
+    h1 {
       font-size: 24px;
       color: $gray-color--dark-dark;
       margin: 0px;
     }
-    &__label{
+
+    &__label {
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -256,7 +396,8 @@
       display: block;
       margin-top: 30px;
     }
-    textarea{
+
+    textarea {
       border: 0;
       background-color: $gray-color--light-lightest;
       color: $gray-color--dark-dark;
@@ -266,28 +407,33 @@
       font-size: 14px;
       display: block;
       width: 100%;
-      &:focus{
+
+      &:focus {
         outline: 0;
       }
     }
-    &__radio{
+
+    &__radio {
       display: block;
       color: $gray-color--dark-medium;
       margin: 5px 0px;
-      input{
+
+      input {
         margin-right: 10px;
         border: 0px;
         background-color: $gray-color--light-light;
         display: inline-block;
         vertical-align: middle;
       }
-      span{
+
+      span {
         display: inline-block;
         vertical-align: middle;
         font-size: 14px;
       }
     }
-    .admin__votes__btn{
+
+    .admin__votes__btn {
       margin-top: 20px;
       text-align: center;
       padding: 15px 0px;

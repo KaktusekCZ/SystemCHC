@@ -479,6 +479,101 @@
 .admin__votes__btn--voted:hover {
   color: #1a1a1a;
   background-color: transparent;
+}.admin__edit {
+  padding: 3% 13%;
+}
+
+.admin__edit .admin__votes__title {
+  margin-bottom: 30px;
+}
+
+.admin__edit .input-group {
+  height: 38px;
+}
+
+.admin__edit .accordion .card {
+  margin-bottom: 5px;
+}
+
+.admin__edit .accordion .card-header {
+  align-items: center;
+}
+
+.admin__edit .accordion .card-header .col-md-4 {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.admin__edit .accordion .card-header .col-md-4:last-of-type {
+  justify-content: flex-end;
+}
+
+.admin__edit .accordion .card-header .col-md-4:first-of-type {
+  justify-content: flex-start;
+}
+
+.admin__edit .accordion .card-header h2 {
+  font-size: 18px;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+.admin__edit .accordion .card-header__btn {
+  text-align: right;
+  background-color: #f6e823;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: 0px;
+  outline: 0;
+  cursor: pointer;
+}
+
+.admin__edit .accordion .card-header__btn__delete {
+  border-bottom: 3px solid #d32535;
+  background-color: #dc3545;
+  color: #fff;
+  margin-right: 15px;
+}
+
+.admin__edit .accordion .card-header__btn__delete:hover {
+  background-color: #e04b59 !important;
+  border-bottom: 3px solid #dc3545 !important;
+  color: #fff !important;
+}
+
+.admin__edit .accordion .card-header__btn:hover {
+  text-decoration: none;
+  color: inherit;
+  background-color: #f9f06c;
+}
+
+.admin__edit .accordion .card-header__btn:focus {
+  outline: 0;
+}
+
+.admin__edit .accordion .card-header__btn .fas {
+  margin-left: 15px;
+}
+
+.admin__edit .accordion .card-body .row {
+  width: 100%;
+}
+
+.admin__edit .accordion .card-body .row form {
+  width: 100%;
+  display: flex;
+}
+
+.admin__edit .accordion .card-body .send {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .admin__modal .modal-content {

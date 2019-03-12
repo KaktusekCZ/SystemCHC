@@ -7,7 +7,6 @@ if (!isset($_SESSION['username'])) {
 require(__DIR__ . '/../actions/connectDB.php');
 require(__DIR__ . '/../actions/logoutAuto.php');
 require(__DIR__ . '/../actions/functions.php');
-
 require(__DIR__ . '/../actions/getAccount.php');
 require(__DIR__ . '/../actions/getGroup.php');
 require(__DIR__ . '/../actions/getEvents.php');
@@ -27,6 +26,7 @@ require(__DIR__ . '/../actions/getEvents.php');
         <link href="../icons/fontawesome/all.min.css" rel="stylesheet">
         <link href="../css/main.css" rel="stylesheet">
         <link rel="icon" href="../images/favicon.ico" type="image/x-icon" sizes="16x16">
+        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
@@ -52,6 +52,11 @@ require(__DIR__ . '/../actions/getEvents.php');
                     <?php
             require(__DIR__ . '/../actions/loginStatus.php');
             require(__DIR__ . '/../includes/topbar--default.php');
+            if($accRow["type"] == 1){
+                require (__DIR__ . '/../includes/content--student.php');
+            }elseif ($accRow["type"] == 2){
+                require (__DIR__ . '/../includes/content--teacher.php');
+            }
             ?>
 
                     <div class="tab-pane fade show active" id="votes-list" role="tabpanel" aria-labelledby="votes-list-tab">
@@ -61,7 +66,7 @@ require(__DIR__ . '/../actions/getEvents.php');
                     $events = null;
                     require(__DIR__.'/../actions/getEvents.php');
                 } catch(Exception $e) {
-                    echo "Chyba: NepodaÅ™ilo se zobrazit dostupnÃ© hodnocenÃ­. <br>".$e;
+                    echo "Chyba: Nepodaøilo se zobrazit dostupné hodnocení. <br>".$e;
                 }finally{
                     require(__DIR__.'/../actions/getVotedEvents.php');
                     require(__DIR__.'/../includes/votes-list.php');
@@ -78,11 +83,9 @@ require(__DIR__ . '/../actions/getEvents.php');
                     <div id="modal-space">
 
                     </div>
-
                 </div>
             </div>
         </div>
-        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
         <script src="../js/main.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/iziToast.js"></script>
