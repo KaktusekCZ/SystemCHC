@@ -1,12 +1,14 @@
 <div class="admin__edit">
     <?php echo '<h1 class="admin__votes__title">Editace žákovských účtů</h1>';
     require(__DIR__ . '/../actions/connectDB.php');
-    $res = $mysqli->query("SELECT * FROM chc_users where type = 1");
-    $class = array("1. VMA", "1. GD", "1. MT", "2. VMA", "2. GD", "2. MT", "3. VMA", "3. GD", "3. MT", "4. VMA", "4. GD", "4. MT");
+    $res = $mysqli->query("SELECT * FROM chc_users where type = 1 OR type = 2");
+    $class = array(1 => "1. VMA", 2 => "1. GD", 3 => "1. MT", 4 => "2. VMA", 5 => "2. GD", 6 => "2. MT", 7 => "3. VMA", 8 => "3. GD", 9 => "3. MT", 10 => "4. VMA", 11 => "4. GD", 12 => "4. MT");
     include(__DIR__ . '/../actions/loginStatus.php');
     ?>
     <div class="accordion" id="users">
-        <?php while ($item = $res->fetch_assoc()): ?>
+        <?php while ($item = $res->fetch_assoc()):
+                $group = (isset($class[$item["groupID"]]) ? $class[$item["groupID"]] : "Učitel");
+            ?>
         <div class="card">
             <div class="card-header" id="heading-<?php echo $item['id'] ?>">
                 <div class="row">
@@ -17,7 +19,7 @@
                     </div>
                     <div class="col-md-4">
                         <span class="trida">
-                            <?php echo $class[$item["groupID"] - 1] ?></span>
+                            <?php echo $group ?></span>
                     </div>
                     <div class="col-md-4">
                         <button class="card-header__btn" type="button" data-toggle="collapse" data-target="#user-<?php echo $item['id'] ?>" aria-expanded="true" aria-controls="user-<?php echo $item['id'] ?>">
@@ -37,51 +39,24 @@
                                 </div>
                                 <input type="text" name="username" autocomplete="username" class="form-control login__username" placeholder="Uživatelské jméno" aria-label="Uživatelské jméno" aria-describedby="login_username" value="<?php echo $item['name'] ?>" required="required">
                             </div>
+                            <?php if(isset($class[$item["groupID"]])): ?>
                             <div class="input-group mb-3 col-lg-4 col-md-12">
                                 <div class="input-group mb-3 groupidcontainer">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-bars"></i></span>
                                     </div>
                                     <select name="groupid" class="form-control register__select">
-                                        <option value="1" <?php if ($item["groupID"]==1) echo "selected='selected'" ?>>
-                                            1. VMA
+                                        <?php foreach ($class as $label):
+                                                $key = array_search($label, $class);
+                                                ?>
+                                        <option value="<?php echo $key ?>" <?php if ($item["groupID"]==$key) echo "selected='selected'" ?>>
+                                            <?php echo $label ?>
                                         </option>
-                                        <option value="2" <?php if ($item["groupID"]==2) echo "selected='selected'" ?>>
-                                            1. GD
-                                        </option>
-                                        <option value="3" <?php if ($item["groupID"]==3) echo "selected='selected'" ?>>
-                                            1. MT
-                                        </option>
-                                        <option value="4" <?php if ($item["groupID"]==4) echo "selected='selected'" ?>>
-                                            2. VMA
-                                        </option>
-                                        <option value="5" <?php if ($item["groupID"]==5) echo "selected='selected'" ?>>
-                                            2. GD
-                                        </option>
-                                        <option value="6" <?php if ($item["groupID"]==6) echo "selected='selected'" ?>>
-                                            2. MT
-                                        </option>
-                                        <option value="7" <?php if ($item["groupID"]==7) echo "selected='selected'" ?>>
-                                            3. VMA
-                                        </option>
-                                        <option value="8" <?php if ($item["groupID"]==8) echo "selected='selected'" ?>>
-                                            3. GD
-                                        </option>
-                                        <option value="9" <?php if ($item["groupID"]==9) echo "selected='selected'" ?>>
-                                            3. MT
-                                        </option>
-                                        <option value="10" <?php if ($item["groupID"]==10) echo "selected='selected'" ?>>
-                                            4. VMA
-                                        </option>
-                                        <option value="11" <?php if ($item["groupID"]==11) echo "selected='selected'" ?>>
-                                            4. GD
-                                        </option>
-                                        <option value="12" <?php if ($item["groupID"]==12) echo "selected='selected'" ?>>
-                                            4. MT
-                                        </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
+                            <?php endif; ?>
                             <div class="input-group mb-3 col-lg-4 col-md-12">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
@@ -90,7 +65,7 @@
                             </div>
                             <input type="hidden" value="<?php echo $item['id'] ?>" name="userId">
                             <div class="input-group col-md-12 send">
-                                <span class="card-header__btn card-header__btn__delete">
+                                <span class="card-header__btn card-header__btn__delete" data-user-id="<?php echo $item['id'] ?>">
                                     Smazat
                                 </span>
                                 <button class="card-header__btn" type="submit" name="submitButton">
@@ -145,6 +120,41 @@
             request.always(function()
             {
                 $inputs.prop("disabled", false);
+            });
+        });
+        $(".card-header__btn__delete").click(function()
+        {
+            if (request)
+            {
+                request.abort();
+            }
+            let id = $(this).attr("data-user-id");
+            console.log(id);
+            request = $.ajax(
+            {
+                url: "../actions/deleteUser.php",
+                type: "post",
+                data:
+                {
+                    'delete': id,
+                }
+            });
+            request.done(function(response, textStatus, jqXHR)
+            {
+                console.log(response);
+                switch (response)
+                {
+                    case "1":
+                        window.location.reload();
+                        break;
+                    default:
+                        showMessage("Vyskytla se neznámá chyba", "red");
+                        break;
+                }
+            });
+            request.fail(function()
+            {
+                showMessage("Vyskytla se neznámá chyba. Prosím, kontaktujte správce", "red");
             });
         });
     }

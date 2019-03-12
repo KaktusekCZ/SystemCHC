@@ -55,6 +55,8 @@ require(__DIR__ . '/../actions/getEvents.php');
                 require (__DIR__ . '/../includes/content--student.php');
             }elseif ($accRow["type"] == 2){
                 require (__DIR__ . '/../includes/content--teacher.php');
+            }elseif ($accRow["type"] == 3){
+                require (__DIR__ . '/../includes/content--admin.php');
             }
             ?>
             <div id="modal-space">

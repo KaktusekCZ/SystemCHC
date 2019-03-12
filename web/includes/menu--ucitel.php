@@ -1,2 +1,2 @@
-<a class="admin__menu__item nav-link active" id="create-vote-tab" data-toggle="pill" href="#create-vote" role="tab" aria-controls="create-vote" aria-selected="true"><i class="fas fa-plus"></i> Vytvořit událost</a>
-<a class="admin__menu__item nav-link" id="student-setting-tab" data-toggle="pill" href="#student-setting" role="tab" aria-controls="student-setting" aria-selected="false"><i class="fas fa-list-ul"></i> Upravit žáka</a>
+<a class="admin__menu__item nav-link active" id="votes-list-tab" data-toggle="pill" href="#votes-list" role="tab" aria-controls="votes-list" aria-selected="true"><i class="fas fa-plus"></i> Hodnotit</a>
+<a class="admin__menu__item nav-link" id="my-votes-tab" data-toggle="pill" href="#my-votes" role="tab" aria-controls="my-votes" aria-selected="false"><i class="fas fa-list-ul"></i> Mé hodnocení</a>
